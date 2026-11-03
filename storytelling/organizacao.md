@@ -363,3 +363,73 @@ Usar `sgleam/check` (conferir os nomes `check.eq` e o sufixo `_examples` nos exe
 - Assunto: *Trabalho 2 de Programação Funcional, Semestre, 2026*.
 - Corpo: nome completo e RA de cada integrante.
 - Apresentação oral de 10 a 15 minutos.
+# Funções por arquivo — trab_PF_2
+
+Este levantamento considera os arquivos `.gleam` presentes na pasta `code/` do ZIP enviado. É importante separar **funções já implementadas** de **funções apenas planejadas** em `storytelling/organizacao.md`.
+
+## 1. Funções encontradas no código atual
+
+| Arquivo | Função | Visibilidade | Parâmetros | Retorno | Responsabilidade |
+|---|---|---|---|---|---|
+| `jogador.gleam` | `novo` | Pública (`pub`) | `nome: String`, `andar: Int` | `Jogador` | Cria um jogador com inventário e flags vazios, 3 pontos de vida e localização inicial informada. |
+| `jogador.gleam` | `pegar` | Pública (`pub`) | `j: Jogador`, `item: Item` | `Jogador` | Adiciona um item ao inventário do jogador. |
+| `jogador.gleam` | `tem` | Pública (`pub`) | `j: Jogador`, `item: Item` | `Bool` | Verifica se o jogador possui determinado item no inventário. |
+| `jogador.gleam` | `consumir` | Pública (`pub`) | `j: Jogador`, `item: Item` | `Jogador` | Remove uma ocorrência do item do inventário. |
+| `jogador.gleam` | `remover_um` | Privada | `itens: List(Item)`, `item: Item` | `List(Item)` | Função recursiva auxiliar que remove a primeira ocorrência do item encontrado. |
+| `jogador.gleam` | `ativar` | Pública (`pub`) | `j: Jogador`, `flag: Flag` | `Jogador` | Ativa uma flag, evitando adicioná-la novamente caso já esteja ativa. |
+| `jogador.gleam` | `flag_ativa` | Pública (`pub`) | `j: Jogador`, `flag: Flag` | `Bool` | Verifica se determinada flag já está registrada no jogador. |
+| `jogador.gleam` | `resolvido` | Pública (`pub`) | `j: Jogador`, `enigma: Int` | `Bool` | Verifica se o jogador possui a flag `EnigmaResolvido(enigma)`. |
+| `jogador.gleam` | `mover` | Pública (`pub`) | `j: Jogador`, `andar: Int` | `Jogador` | Atualiza a localização do jogador para o andar informado. |
+
+## 2. Situação dos demais arquivos
+
+| Arquivo | Funções implementadas atualmente | Observação |
+|---|---|---|
+| `objeto.gleam` | Nenhuma | Contém apenas a definição planejada do tipo `Objeto`. A linha inicial está incorreta/concatenada (`import jogadorpub type Objeto`) e precisa ser corrigida. |
+| `enigma.gleam` | Nenhuma | Contém somente `import jogador`. |
+| `ambiente.gleam` | Nenhuma | Contém somente os imports de `objeto` e `enigma`. |
+| `cenario.gleam` | Nenhuma | Contém somente `import ambiente`. |
+| `jogo.gleam` | Nenhuma | Contém somente `import cenario`. |
+| `menu.gleam` | Nenhuma | Contém somente `import jogo`. |
+
+## 3. Funções previstas no planejamento (`storytelling/organizacao.md`)
+
+Estas funções aparecem no documento de organização, mas **ainda não estão implementadas nos arquivos `.gleam` do ZIP**.
+
+| Arquivo previsto | Função | Responsabilidade planejada |
+|---|---|---|
+| `objeto.gleam` | `pegando(item)` | Produzir uma função de interação que adiciona o item ao inventário. |
+| `objeto.gleam` | `ativando(flag)` | Produzir uma função de interação que ativa uma flag do jogador. |
+| `objeto.gleam` | `exigindo(item, efeito)` | Produzir uma interação que só executa o efeito se o jogador possuir o item exigido. |
+| `objeto.gleam` | `depois(f, g)` | Compor dois efeitos, executando um e depois o outro. |
+| `enigma.gleam` | `resolver_enigma(enigma, resposta, jogador)` | Verificar requisito e resposta; aplicar o efeito e registrar o enigma como resolvido quando correto. |
+| `ambiente.gleam` | `buscar(andares, numero)` | Buscar recursivamente um ambiente pelo número do andar, retornando `Result(Ambiente, Nil)`. |
+| `ambiente.gleam` | `explorar(ambiente, jogador)` | Produzir uma descrição textual do ambiente para o jogador. |
+| `cenario.gleam` | `torre()` | Construir e devolver a lista dos sete andares. |
+| `cenario.gleam` | `garagem()` | Construir o ambiente do primeiro andar. |
+| `cenario.gleam` | `triagem()` | Construir o ambiente do segundo andar. |
+| `cenario.gleam` | `armazem()` | Construir o ambiente do terceiro andar. |
+| `cenario.gleam` | `baterias()` | Construir o ambiente do quarto andar. |
+| `cenario.gleam` | `placas()` | Construir o ambiente do quinto andar. |
+| `cenario.gleam` | `computadores()` | Construir o ambiente do sexto andar. |
+| `cenario.gleam` | `seguranca()` | Construir o ambiente do sétimo andar. |
+| `jogo.gleam` | `novo()` | Criar o estado inicial do jogo. |
+| `jogo.gleam` | `aplicar(jogo, acao)` | Aplicar uma ação ao estado do jogo. |
+| `jogo.gleam` | `executar(jogo, acoes)` | Executar uma sequência de ações. |
+| `jogo.gleam` | `ir(jogo, andar)` | Validar e realizar a movimentação para outro andar. |
+| `jogo.gleam` | `interagir(jogo, nome)` | Localizar um objeto no ambiente atual e executar sua interação. |
+| `jogo.gleam` | `resolver(jogo, id, resposta)` | Localizar e tentar resolver um enigma. |
+| `jogo.gleam` | `venceu(jogo)` | Verificar se a condição de vitória foi alcançada. |
+| `menus.gleam` (o ZIP contém `menu.gleam`) | `m1(j)` | Exibir informações/explorar o ambiente. |
+| `menus.gleam` (o ZIP contém `menu.gleam`) | `m2(j)` | Consultar o inventário. |
+| `menus.gleam` (o ZIP contém `menu.gleam`) | `m3(j)` | Examinar os enigmas. |
+| `menus.gleam` (o ZIP contém `menu.gleam`) | `exit()` | Encerrar a execução/menu. |
+| `menus.gleam` (o ZIP contém `menu.gleam`) | `display_main_menu()` | Exibir o menu principal. |
+
+## 4. Observações
+
+- `jogador.gleam` é o único arquivo que contém funções implementadas no ZIP analisado.
+- `objeto.gleam` ainda não contém as fábricas de efeitos descritas no planejamento.
+- O planejamento usa o nome `menus.gleam`, mas o arquivo enviado chama-se `menu.gleam`; convém padronizar o nome e os imports.
+- O documento de planejamento cita `consumir` e `mover` como operações do jogador? Na versão atual do código elas existem; `consumir` não aparece na lista resumida do planejamento.
+- Os nomes das funções de `cenario.gleam` são uma proposta de organização. Confirmem os nomes finais antes de implementar.
