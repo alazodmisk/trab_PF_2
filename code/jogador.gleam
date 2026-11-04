@@ -1,7 +1,3 @@
-import gleam/int
-import gleam/list
-import gleam/string
-
 // Item guarda o que o jogador carrega. Flag guarda o que o jogador 
 // já fez ou mudou no mundo, como a alavanca puxada ou um enigma 
 // resolvido. A separação existe porque “energia ligada” não é um 
@@ -20,13 +16,13 @@ pub type Flag {
     PortaPlacasAberta
     EsteiraLigada
     EnigmaResolvido(Int)
+    Coletado(String)
 }
 
 pub type Jogador {
     Jogador(
         nome: String,
         inventario: List(Item),
-        pontos_de_vida: Int,
         localizacao: Int,
         flags: List(Flag),
     )
@@ -36,10 +32,13 @@ pub fn novo(nome: String, andar: Int) -> Jogador {
     Jogador(
         nome: nome,
         inventario: [],
-        pontos_de_vida: 3,
         localizacao: andar,
         flags: [],
     )
+}
+
+pub type Saida { 
+    Saida(destino: Int, requisito: fn(Jogador) -> Bool) 
 }
 
 pub fn pegar(j: Jogador, item: Item) -> Jogador {
@@ -47,7 +46,14 @@ pub fn pegar(j: Jogador, item: Item) -> Jogador {
 }
 
 pub fn tem(j: Jogador, item: Item) -> Bool {
-    list.contains(j.inventario, item) //Provavelmente não pode usar esse tipo de função
+    contem(j.inventario, item)
+}
+
+fn contem(itens: List(Item), item: Item) -> Bool {
+    case itens {
+        [] -> False
+        [primeiro, ..resto] -> primeiro == item || contem(resto, item)
+    }
 }
 
 pub fn consumir(j: Jogador, item: Item) -> Jogador {
@@ -73,9 +79,19 @@ pub fn ativar(j: Jogador, flag: Flag) -> Jogador {
 }
 
 pub fn flag_ativa(j: Jogador, flag: Flag) -> Bool {
-    list.contains(j.flags, flag) //Provavelmente não pode usar esse tipo de função
+    verifica_flag(j.flags, flag)
 }
 
+fn verifica_flag(flags: List(Flag), flag: Flag) -> Bool {
+    case flags {
+        [] -> False
+        [primeira, ..resto] ->
+            case primeira == flag {
+                True -> True
+                False -> verifica_flag(resto, flag)
+            }
+    }
+}
 pub fn resolvido(j: Jogador, enigma: Int) -> Bool {
     flag_ativa(j, EnigmaResolvido(enigma))
 }
