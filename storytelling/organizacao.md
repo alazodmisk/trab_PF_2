@@ -1,435 +1,693 @@
-### TORRE DO LIXO ELETRÔNICO
-O personagem era um guarda de segurança que dormiu enquanto trabalhava. Ao acordar, descobre que a torre de descarte de lixo eletrônico foi fechada e ele não consegue encontrar suas chaves e precisa ir embora.
+# Guia completo: Trabalho Prático 2 de Programação Funcional
 
-Os valores que eu colocar aqui podem passar por mudanças:
-- 7 andares
-- 10 enigmas (3 salas com dois enigmas cada para resolver)
-- 5 tipos de objetos (chaves, botões de ativação, papéis com anotações, pé de cabra, cabos de energia)
+**Tema 09: A Torre do Lixo Eletrônico** · Gleam / SGleam · UEM, Ciência da Computação · Prof. Wagner Igarashi
 
-##### Andares
-1. Garagem: A garagem é a sala de saída. É por aqui que os caminhões chegam descarregando o lixo eletrônico.
-2. Triagem: Após os lixos serem deixados pelos caminhões, eles são levados até a sala de triagem, onde é feita a separação.
-3. Armazém de ferramentas: Neste andar ficam guardadas as ferramentas dos funcionários.
-4. Andar da sala de Baterias: Neste andar são armazenadas as baterias que foram descartadas e deixadas pelos caminhões.
-5. Andar da sala de Placas eletrônicas: Neste andar são descartadas as placas eletrônicas deixadas pelos caminhões.
-6. Andar da sala de computadores descartados: Neste andar são descartados os computadores usados deixados pelos caminhões.
-7. Andar da sala de segurança: Neste andar é possível encontrar senhas e câmeras de segurança. **(Início do jogo)**
-
-Andares X podem ter caminhos para outros andares que não sejam o X+1 nem o X-1, por exemplo, no andar 4 você pode ir diretamente para o segundo andar por meio do duto de ventilação.
-
-##### Salas com dois enigmas
-- Andar 5 (Placas eletrônicas): enigmas 3 e 4
-- Andar 4 (Baterias): enigmas 5 e 6
-- Andar 2 (Triagem): enigmas 8 e 9
-
-##### Tabela dos andares
-| ANDAR | ENIGMA/SITUAÇÕES | OBJETOS PRESENTES | PARA ONDE VAI |
-|--|--|--|--|
-| 1 | 10 | Portão da garagem, papel com anotações na parede | Saída do jogo (fim) ou 2° |
-| 2 | 8 e 9 | Painel da esteira, 3 caixas de separação (metal, plástico, vidro), chaves (dentro da caixa certa) | 1° ou 3° |
-| 3 | 7 | Quadro de energia com alavanca, cabo de energia, armário trancado com o pé de cabra | 2° ou 4° |
-| 4 | 5 e 6 | Prateleira de baterias, segundo cabo de energia, grade do duto de ventilação, botão de ativação (azul) | 3°, 5° ou 2° (duto de ventilação) |
-| 5 | 3 e 4 | Porta com teclado, caixa de placas lacrada, botão de ativação (vermelho), papel com anotações | 4° ou 6° |
-| 6 | 2 | Notebook contendo infos | 5° ou 7° |
-| 7 | 1 | Papel com anotações do guarda, computador do colega contendo a senha da porta da sala de placas eletrônicas | 6° ou 5° (duto de ventilação) |
-
-##### Enigmas
-1. Os computadores da sala de segurança estão todos desligados e todas as tomadas do seu e dos outros computadores estão desativadas. Para ativar, o jogador deve puxar a alavanca no quadro de energia presente no andar das ferramentas (3° andar). Você tem duas opções para descer:
-   
-        Descer pelas escadas: 6° andar
-        Entrar no duto de ventilação: 5° Andar
-
-2. Dentre os computadores descartados você encontra um notebook com um led piscando, você percebe que o led indica falta de bateria e por isso é impossível ligá-lo. Você deve encontrar um cabo de energia para ligá-lo:
-
-        Ao usar o cabo de energia no computador, o mesmo revela um código 1540 e diz que o antigo usuário do notebook é o seu colega de trabalho na sala de segurança
-
-   Obs.: o cabo de energia está no 3° andar. O jogador precisa voltar ao 6° depois de passar pelo armazém.
-
-3. (Andar das placas eletrônicas) A porta da sala de placas está trancada por um teclado numérico de 4 dígitos. A senha está guardada no computador do colega, no 7° andar. O jogador precisa ter religado a energia (enigma 1) e usar o código 1540 (enigma 2) para entrar no computador, que revela a senha:
-
-        Senha da porta: 2486
-
-4. (Sala de placas) Dentro da sala há uma caixa de placas lacrada com lacre de metal. O jogador precisa usar o pé de cabra para abri-la. Dentro está uma placa com um botão de ativação vermelho e um papel com anotações:
-
-        "O portão da garagem só abre com a chave e com os dois botões, vermelho primeiro, azul depois."
-
-5. (Andar das baterias) O duto de ventilação que leva ao 2° andar está coberto por uma grade parafusada. O jogador precisa usar o pé de cabra para arrancá-la, abrindo o atalho:
-
-        Duto de ventilação: 2° andar
-
-6. (Andar das baterias) Um painel trancado guarda o segundo botão de ativação (azul). Para destravá-lo, o jogador deve encaixar 3 baterias nos soquetes. Cada bateria mostra a carga no visor (20%, 55% e 90%) e um papel colado no painel diz: "Ligue da menos carregada para a mais carregada." Ao encaixar na ordem certa, o painel se abre:
-
-        Botão de ativação azul liberado
-
-   Obs.: um segundo cabo de energia fica jogado ao lado da prateleira de baterias. O jogador vai precisar dele no 2° andar.
-
-7. (Armazém de ferramentas) Além da alavanca (enigma 1) e do cabo de energia, há um armário trancado com cadeado de 3 dígitos, onde está o pé de cabra. A dica está no papel com anotações do guarda, no 7° andar: "Meu código do armário: onde eu trabalho, onde eu saio, onde eu guardo as ferramentas."
-
-        Código do armário: 713 (7° andar, garagem no 1°, armazém no 3°)
-
-8. (Triagem) O painel da esteira de separação está sem energia e as chaves do guarda caíram em algum ponto dela. O jogador deve conectar o cabo de energia do 4° andar ao painel para religar a esteira:
-
-        Esteira ligada: as caixas de separação ficam acessíveis
-
-9. (Triagem) Com a esteira ligada, as chaves caem junto com o lixo e precisam ser separadas. Há 3 caixas: metal, plástico e vidro. O papel com anotações do computador do colega (7° andar) diz que o chaveiro é de metal. O jogador coloca o objeto na caixa certa e recebe:
-
-        Chaves da garagem (e do guarda)
-
-10. (Garagem) O portão da garagem tem uma fechadura e dois botões de ativação. O jogador precisa usar a chave da garagem e apertar os botões na ordem indicada no papel da parede: vermelho primeiro, azul depois. Se errar a ordem, o portão trava por alguns segundos e é preciso tentar de novo.
-
-        Portão aberto: o guarda escapa e o jogo termina
-
-##### Sugestão de caminho principal (resolução)
-1. 7° (papel do guarda com a dica do armário) → descer até o 3° → puxar a alavanca (enigma 1) e pegar o cabo de energia.
-2. Abrir o armário com 713 (enigma 7) e pegar o pé de cabra.
-3. Subir ao 6° → ligar o notebook (enigma 2) e obter o código 1540.
-4. Subir ao 7° → usar 1540 no computador do colega e obter a senha 2486.
-5. Descer ao 5° → abrir a porta (enigma 3) e abrir a caixa com o pé de cabra (enigma 4) → botão vermelho.
-6. Descer ao 4° → arrancar a grade (enigma 5), resolver o painel das baterias (enigma 6) → botão azul e segundo cabo.
-7. Duto até o 2° → religar a esteira (enigma 8) e separar o lixo (enigma 9) → chaves.
-8. Descer ao 1° → portão (enigma 10) → fim.
-
-
-# Torre do Lixo Eletrônico: organização do projeto
-
-Trabalho Prático 2 de Programação Funcional (UEM, Ciência da Computação), tema 09. Simulador de escape room em Gleam, executado com o **SGleam**, 100% no terminal (sem interface gráfica).
-
-A história, os andares, os enigmas e o caminho de resolução estão em `organizacao.md`. Este documento trata só da **estrutura do código**.
+> Este guia tem 3 partes: **(A)** o que o trabalho é e o que o professor cobra, **(B)** onde o seu projeto está hoje (com base no `trab_PF_2.zip`), **(C)** o passo a passo completo até a entrega.
 
 ---
 
-## 1. Premissas
+## PARTE A: O que você está fazendo
 
-- Execução pelo SGleam (`./sgleam arquivo.gleam` ou REPL), sem `gleam.toml` e sem `main` de projeto.
-- Sem entrada dinâmica (`read()`): o jogador digita chamadas de função no REPL.
-- Lógica **pura**: toda ação recebe um estado e devolve um **novo** estado.
-- Só o módulo `menus.gleam` usa `io.println`.
-- Interface visual (`sgleam/image`, `sgleam/world`) fica fora do escopo.
+### A.1 Em uma frase
 
-> **A verificar no início** (a página do SGleam não detalha): como ele resolve `import` entre arquivos. Teste com `a.gleam` (função pública) e `b.gleam` (`import a`) rodando `./sgleam b.gleam`. Se não funcionar, consulte `./sgleam --help`, o material de aula ou o professor.
+Você está programando, em **Gleam** (rodando no **SGleam**, no terminal), um **jogo de escape room de texto** cuja história é a "Torre do Lixo Eletrônico": um guarda de segurança dorme no trabalho, acorda com a torre trancada, sem as chaves, e precisa descer 7 andares resolvendo 10 enigmas até abrir o portão da garagem.
+
+### A.2 O ponto real do trabalho
+
+O jogo é só o pretexto. A disciplina é de **Programação Funcional**, então o que o professor avalia é se você usou o estilo funcional:
+
+| Conceito | O que significa na prática | Onde aparece no seu jogo |
+|---|---|---|
+| **Tipos algébricos** | `type` com variantes (`Chave`, `PeDeCabra`...) e registros | `Item`, `Flag`, `Jogador`, `Objeto`, `Enigma`, `Ambiente`, `Acao`, `Jogo` |
+| **Pattern matching** | `case` que decide pela forma do dado | `aplicar` (sobre `Acao`), `buscar`, `remover_um`, `resolver_enigma` |
+| **Recursão** | função que chama a si mesma, no lugar de `for`/`while` | `buscar` andar por número, `remover_um`, (opcional) `tem` |
+| **Composição de funções** | juntar funções pequenas em uma maior | `depois(f, g)`, pipes `\|>` |
+| **Funções de ordem superior** | funções que recebem/devolvem funções | `interacao: fn(Jogador) -> Jogador`, `efeito`, `requisito`, `exigindo`, `list.fold`, `list.map` |
+| **Pureza** | nada é modificado; toda ação devolve um **estado novo** | tudo, exceto `menus.gleam` |
+
+### A.3 Regras do enunciado que você NÃO pode esquecer
+
+1. **Módulos separados:** `ambiente.gleam`, `objeto.gleam`, `enigma.gleam`, `jogador.gleam`, `jogo.gleam` e **`menus.gleam`** (no seu zip está `menu.gleam`, precisa renomear).
+2. **Lógica pura:** funções de regra devolvem novo estado e nunca alteram o anterior.
+3. **`io.println` só na camada de apresentação** (`menus.gleam`).
+4. **Menus por funções nomeadas** (`m1()`, `m2()`, `m3()`, `exit()`), sem `read()`.
+5. **Mecânicas obrigatórias:** explorar ambientes, interagir com objetos, resolver enigmas.
+6. **História própria:** início, progressão e uma razão clara para sair; enigmas ligados ao cenário; pistas suficientes para dedução; caminho até a saída testado.
+7. **Interface visual (SGleam image/world) é opcional.** Você decidiu ficar 100% no terminal, o que é permitido.
+8. **Avaliação:** (a) implementação: correção, completude, uso dos conceitos, documentação, organização; a análise automatizada pode olhar **linhas de código, documentação e testes unitários**; (b) apresentação oral.
+9. **Equipe:** 1 a 3 pessoas; todos contribuem com código, documentação e testes.
+10. **Tema:** a escolha precisa ser **informada e confirmada pelo professor** (confirme que o tema 09 está aprovado para você).
+
+### A.4 O que entregar
+
+- Arquivos-fonte `.gleam` + **slides em PDF** + arquivos acessórios.
+- Compactar, subir no **Google Drive** e enviar o link para **wigarashi@uem.br**.
+- **Assunto:** `Trabalho 2 de Programação Funcional, Semestre, 2026` (troque "Semestre" pelo semestre da turma, ou pergunte ao professor como ele quer).
+- **Corpo:** nome completo e RA de cada integrante.
+- **Apresentação oral:** 10 a 15 minutos.
+
+> O enunciado não informa a data limite. Confirme com o professor.
 
 ---
 
-## 2. Estrutura de arquivos
+## PARTE B: Onde você está hoje
 
-```
-jogador.gleam     tipos e operações do jogador
-objeto.gleam      tipo Objeto e fábricas de efeitos
-enigma.gleam      tipo Enigma e resolução
-ambiente.gleam    tipo Ambiente e busca de andar
-cenario.gleam     dados da história (os 7 andares)
-jogo.gleam        estado do jogo, ações e regras
-menus.gleam       apresentação (io.println) e m1(), m2()...
-jogo_test.gleam   testes (sgleam/check)
-```
+### B.1 Estado dos arquivos do zip
 
-### Ordem de dependência (sem ciclos)
+| Arquivo | Estado | O que falta |
+|---|---|---|
+| `jogador.gleam` | ✅ **Pronto** (9 funções: `novo`, `pegar`, `tem`, `consumir`, `remover_um`, `ativar`, `flag_ativa`, `resolvido`, `mover`) | Pequenos ajustes (ver B.3), comentários de documentação |
+| `objeto.gleam` | ⚠️ **Quebrado** | `import jogadorpub` (linha grudada), `type Objeto` sem `pub`, 4 funções com `todo` |
+| `enigma.gleam` | ❌ Só `todo` | Tipo `Enigma` e `resolver_enigma` |
+| `ambiente.gleam` | ❌ Só `todo` | Tipo `Ambiente`, `buscar`, `explorar` |
+| `cenario.gleam` | ❌ Só `import ambiente` | Os 7 andares, objetos e 10 enigmas |
+| `jogo.gleam` | ❌ Só `import cenario` | Estado, `Acao`, `aplicar`, `executar`, `ir`, `interagir`, `resolver`, `venceu` |
+| `menu.gleam` | ❌ Nome errado + `todo` | Renomear para `menus.gleam`; `m1`, `m2`, `m3`, `exit`, `display_main_menu` |
+| `jogo_test.gleam` | ❌ Não existe | Testes |
+| Slides PDF | ❌ | Fazer |
 
-```
-jogador
-   ├── objeto ──┐
-   └── enigma ──┴── ambiente ── cenario ── jogo ── menus
-```
+O **design** (história, andares, tabela, 10 enigmas, caminho de resolução e arquitetura) já está bem fechado em `storytelling/organizacao.md`. O trabalho que falta é **implementar** e **testar**.
 
-Cada módulo só importa os que aparecem antes dele. Os imports ficam sem prefixo, por exemplo `import jogador.{type Jogador}`.
+### B.2 Verificação do seu design (o jogo é resolvível?)
+
+Conferi o caminho principal do seu `organizacao.md` contra os requisitos de cada enigma e **ele fecha**: nenhum item fica faltando, os dois cabos de energia são necessários (um é consumido no notebook, o outro na esteira) e todo enigma tem pista dedutível. As 10 etapas de enigma batem com "3 salas com 2 enigmas".
+
+### B.3 Pontos de atenção (resolva antes de codar)
+
+| # | Problema | Por que importa | Sugestão |
+|---|---|---|---|
+| 1 | **Saída condicional:** o duto 4→2 só existe depois do enigma 5, mas `saidas: List(Int)` é fixa | Sem isso o jogador atravessaria o duto sem arrancar a grade | Criar `type Saida { Saida(destino: Int, requisito: fn(Jogador) -> Bool) }` e usar `List(Saida)` |
+| 2 | **Pegar objeto duas vezes duplica o item** (`pegando` não é idempotente) | O jogador pegaria 5 cabos de energia | Nova flag `Coletado(String)`; `pegando(id, item)` só pega se a flag não estiver ativa |
+| 3 | **Dica do portão duplicada:** o papel da caixa (andar 5) e o papel da parede (andar 1) dizem a mesma ordem dos botões | Duas fontes para a mesma informação | Deixar um dos dois como a pista "oficial" e o outro como confirmação, ou manter só um |
+| 4 | **"Papel do computador do colega" (enigma 9)** diz que o chaveiro é de metal, mas não está na tabela do andar 7 | Falta de onde a pista vem | Fazer o computador do colega entregar **dois** papéis: senha 2486 e "chaveiro é de metal" |
+| 5 | **Revelar o código 1540 (enigma 2)**: `interacao` só devolve `Jogador`, não texto | O jogador precisa *ver* o código | Entregar a informação como item `Papel("Código 1540...")`; ele lê no inventário (`m2`) |
+| 6 | **Mensagem pós-interação:** o menu não sabe o que aconteceu | Experiência de jogo pobre | Comparar o jogador antes/depois; se mudou, imprimir a `descricao` do objeto; se não, "nada acontece" |
+| 7 | **`pontos_de_vida` nunca é usado** | Campo do enunciado sem função | Opcional: errar a ordem dos botões no portão custa 1 PV (3 PV no total); 0 PV = fim de jogo. Ou deixe o campo sem uso |
+| 8 | **`estado: String` do `Objeto`** não consegue mudar (a interação só devolve `Jogador`) | Campo morto | Usar só como rótulo fixo ("trancado", "livre"), ou calcular o texto a partir das flags |
+| 9 | **Duto 5→7?** A tabela do andar 5 diz "4° ou 6°" | É duto de mão única | Decida e mantenha: duto só **desce** (7→5 e 4→2) |
+| 10 | **`list.contains` com comentário "provavelmente não pode"** | O enunciado não proíbe a biblioteca (o próprio exemplo usa `list.map`) | Pode usar. Se quiser mostrar mais recursão, escreva `tem` recursivo (código na Fase 1) |
+| 11 | **Nome do arquivo e imports:** `menu.gleam` vs `menus.gleam` | Entrega fora do padrão | Renomear |
 
 ---
 
-## 3. Responsabilidade de cada módulo
+## PARTE C: Passo a passo completo
 
-### `jogador.gleam`
+### Fase 0: Preparação (30 min)
 
-Não depende de ninguém. Define o estado do jogador e operações simples sobre ele.
+- [ ] Confirmar com o professor: tema 09 aprovado, data de entrega, formato do assunto do e-mail, se o SGleam é o ambiente esperado.
+- [ ] **Testar imports entre arquivos no SGleam:** criar `a.gleam` (com `pub fn f() { 1 }`) e `b.gleam` (com `import a`, `pub fn g() { a.f() }`) e rodar `./sgleam b.gleam`. Se não funcionar, ver `./sgleam --help` ou o material de aula.
+- [ ] Testar se o REPL aceita redefinir `let j = ...` e como usar `sgleam/check` (nomes `check.eq` e sufixo `_examples`).
+- [ ] Decidir os itens da tabela B.3 (principalmente 1, 2, 5 e 6).
+- [ ] Combinar a divisão de trabalho, se houver mais de uma pessoa.
+
+### Fase 1: Corrigir e fechar o `jogador.gleam` (30 min)
+
+Acrescente a flag de coleta e (opcionalmente) vida:
 
 ```gleam
-pub type Item {
-  Chave
-  BotaoAtivacao(cor: String)
-  Papel(texto: String)
-  PeDeCabra
-  CaboEnergia
-}
-
 pub type Flag {
-  EnergiaLigada
-  NotebookLigado
-  PortaPlacasAberta
-  EsteiraLigada
-  EnigmaResolvido(Int)
+    EnergiaLigada
+    NotebookLigado
+    PortaPlacasAberta
+    EsteiraLigada
+    Coletado(String)      // novo: id do objeto já pego
+    EnigmaResolvido(Int)
 }
 
-pub type Jogador {
-  Jogador(
-    nome: String,
-    inventario: List(Item),
-    pontos_de_vida: Int,
-    localizacao: Int,
-    flags: List(Flag),
-  )
+/// Tira 1 ponto de vida do jogador.
+pub fn perder_vida(j: Jogador) -> Jogador {
+    Jogador(..j, pontos_de_vida: j.pontos_de_vida - 1)
+}
+
+/// Indica se o jogador ainda tem vida.
+pub fn vivo(j: Jogador) -> Bool {
+    j.pontos_de_vida > 0
 }
 ```
 
-Funções: `pegar`, `tem`, `ativar`, `flag_ativa`, `mover`. Todas devolvem um `Jogador` novo (`Jogador(..j, campo: valor)`).
-
-Os 5 tipos de objetos do jogo (chaves, botões de ativação, papéis com anotações, pé de cabra, cabos de energia) viram variantes de `Item`, para o pattern matching trabalhar por nós.
-
-### `objeto.gleam`
-
-Depende de `jogador`. Tipo `Objeto` conforme o enunciado e **fábricas de efeitos** (funções de ordem superior):
+Versão recursiva opcional de `tem` (mais recursão para mostrar na apresentação):
 
 ```gleam
+/// Verifica se o item está no inventário.
+pub fn tem(j: Jogador, item: Item) -> Bool {
+    contem(j.inventario, item)
+}
+
+fn contem(itens: List(Item), item: Item) -> Bool {
+    case itens {
+        [] -> False
+        [primeiro, ..resto] -> primeiro == item || contem(resto, item)
+    }
+}
+```
+
+- [ ] Adicionar `Coletado(String)` ao tipo `Flag`.
+- [ ] Decidir sobre `perder_vida`/`vivo` (item 7 da B.3).
+- [ ] Escrever comentário `///` em **todas** as funções públicas (a análise automatizada olha documentação).
+
+### Fase 2: `objeto.gleam` (1 h)
+
+Corrija o import quebrado e torne o tipo público. Generalize as fábricas com uma função de ordem superior `quando`:
+
+```gleam
+import jogador.{type Flag, type Item, type Jogador}
+
 pub type Objeto {
-  Objeto(
-    nome: String,
-    descricao: String,
-    interacao: fn(Jogador) -> Jogador,
-    estado: String,
-  )
+    Objeto(
+        nome: String,
+        descricao: String,
+        interacao: fn(Jogador) -> Jogador,
+        estado: String,
+    )
 }
-```
 
-| Função | Papel |
-|---|---|
-| `pegando(item)` | efeito que coloca o item no inventário |
-| `ativando(flag)` | efeito que liga uma flag (ex.: `EnergiaLigada`) |
-| `exigindo(item, efeito)` | só aplica o efeito se o jogador tiver o item |
-| `depois(f, g)` | composição de dois efeitos |
-
-### `enigma.gleam`
-
-Depende de `jogador`.
-
-```gleam
-pub type Enigma {
-  Enigma(
-    id: Int,
-    descricao: String,
-    solucao: String,
-    pistas: List(String),
-    requisito: fn(Jogador) -> Bool,
+/// Aplica o efeito só se a condição for verdadeira; senão devolve o jogador intacto.
+pub fn quando(
+    condicao: fn(Jogador) -> Bool,
     efeito: fn(Jogador) -> Jogador,
-  )
+) -> fn(Jogador) -> Jogador {
+    fn(j) {
+        case condicao(j) {
+            True -> efeito(j)
+            False -> j
+        }
+    }
+}
+
+/// Efeito: coloca o item no inventário, uma única vez (usa a flag Coletado).
+pub fn pegando(id: String, item: Item) -> fn(Jogador) -> Jogador {
+    quando(
+        fn(j) { !jogador.flag_ativa(j, jogador.Coletado(id)) },
+        fn(j) { j |> jogador.pegar(item) |> jogador.ativar(jogador.Coletado(id)) },
+    )
+}
+
+/// Efeito: liga uma flag.
+pub fn ativando(flag: Flag) -> fn(Jogador) -> Jogador {
+    fn(j) { jogador.ativar(j, flag) }
+}
+
+/// Efeito: remove um item do inventário.
+pub fn consumindo(item: Item) -> fn(Jogador) -> Jogador {
+    fn(j) { jogador.consumir(j, item) }
+}
+
+/// Só aplica o efeito se o jogador tiver o item.
+pub fn exigindo(item: Item, efeito: fn(Jogador) -> Jogador) -> fn(Jogador) -> Jogador {
+    quando(fn(j) { jogador.tem(j, item) }, efeito)
+}
+
+/// Só aplica o efeito se a flag estiver ativa.
+pub fn exigindo_flag(flag: Flag, efeito: fn(Jogador) -> Jogador) -> fn(Jogador) -> Jogador {
+    quando(fn(j) { jogador.flag_ativa(j, flag) }, efeito)
+}
+
+/// Composição: aplica f e depois g.
+pub fn depois(
+    f: fn(Jogador) -> Jogador,
+    g: fn(Jogador) -> Jogador,
+) -> fn(Jogador) -> Jogador {
+    fn(j) { g(f(j)) }
 }
 ```
 
-`resolver_enigma(enigma, resposta, jogador)`: se o requisito falha ou a resposta está errada, devolve o jogador intacto; se acerta, aplica `efeito` e registra `EnigmaResolvido(id)`.
+> O comentário "não sei se `depois` é necessário": **é**, e é a sua prova de **composição de funções**. Ex.: o notebook precisa consumir o cabo **e** ligar a flag **e** entregar o papel com o código.
 
-O `requisito` modela itens necessários (ex.: enigma 4 exige `PeDeCabra`).
+- [ ] Escrever o arquivo e rodar no SGleam para ver se compila.
+- [ ] Testar no REPL: `let f = pegando("cabo-3", CaboEnergia)` e aplicar duas vezes em `jogador.novo("Guarda", 7)` (deve ter 1 cabo).
 
-### `ambiente.gleam`
-
-Depende de `objeto` e `enigma`.
+### Fase 3: `enigma.gleam` (1 h)
 
 ```gleam
+import gleam/string
+import jogador.{type Jogador}
+
+pub type Enigma {
+    Enigma(
+        id: Int,
+        descricao: String,
+        solucao: String,
+        pistas: List(String),
+        requisito: fn(Jogador) -> Bool,
+        efeito: fn(Jogador) -> Jogador,
+    )
+}
+
+/// Deixa a resposta em minúsculas e sem espaços nas pontas.
+pub fn normalizar(texto: String) -> String {
+    texto |> string.trim |> string.lowercase
+}
+
+/// Resposta certa + requisito cumprido + ainda não resolvido: aplica o efeito
+/// e registra EnigmaResolvido(id). Caso contrário, devolve o jogador intacto.
+pub fn resolver_enigma(enigma: Enigma, resposta: String, j: Jogador) -> Jogador {
+    let acertou = normalizar(resposta) == normalizar(enigma.solucao)
+    case acertou && enigma.requisito(j) && !jogador.resolvido(j, enigma.id) {
+        True -> j |> enigma.efeito |> jogador.ativar(jogador.EnigmaResolvido(enigma.id))
+        False -> j
+    }
+}
+```
+
+- [ ] Escrever e compilar.
+- [ ] Testar com um enigma de teste (resposta certa muda, errada não muda).
+
+### Fase 4: `ambiente.gleam` (1 h)
+
+```gleam
+import enigma.{type Enigma}
+import gleam/int
+import gleam/list
+import gleam/string
+import jogador.{type Jogador}
+import objeto.{type Objeto}
+
+/// Uma saída para outro andar; só está aberta se o requisito for cumprido.
+pub type Saida {
+    Saida(destino: Int, requisito: fn(Jogador) -> Bool)
+}
+
 pub type Ambiente {
-  Ambiente(
-    andar: Int,
-    nome: String,
-    descricao: String,
-    objetos: List(Objeto),
-    saidas: List(Int),
-    enigmas: List(Enigma),
-  )
+    Ambiente(
+        andar: Int,
+        nome: String,
+        descricao: String,
+        objetos: List(Objeto),
+        saidas: List(Saida),
+        enigmas: List(Enigma),
+    )
+}
+
+/// Requisito para saídas sempre abertas.
+pub fn sempre(_j: Jogador) -> Bool {
+    True
+}
+
+/// Busca recursiva do andar pelo número.
+pub fn buscar(andares: List(Ambiente), numero: Int) -> Result(Ambiente, Nil) {
+    case andares {
+        [] -> Error(Nil)
+        [primeiro, ..resto] ->
+            case primeiro.andar == numero {
+                True -> Ok(primeiro)
+                False -> buscar(resto, numero)
+            }
+    }
+}
+
+/// O jogador pode ir para esse destino a partir deste ambiente?
+pub fn saida_aberta(ambiente: Ambiente, destino: Int, j: Jogador) -> Bool {
+    list.any(ambiente.saidas, fn(s) { s.destino == destino && s.requisito(j) })
+}
+
+/// Texto da exploração (função pura; quem imprime é o menus.gleam).
+pub fn explorar(ambiente: Ambiente, j: Jogador) -> String {
+    let objetos = list.map(ambiente.objetos, fn(o) { o.nome })
+    let saidas =
+        ambiente.saidas
+        |> list.filter(fn(s) { s.requisito(j) })
+        |> list.map(fn(s) { int.to_string(s.destino) })
+    string.join(
+        [
+            ambiente.nome <> ": " <> ambiente.descricao,
+            "Objetos: " <> string.join(objetos, ", "),
+            "Saídas: " <> string.join(saidas, ", "),
+        ],
+        "\n",
+    )
 }
 ```
 
-`saidas` é lista de andares. Os atalhos (duto 7→5 e 4→2) são só números a mais na lista. Se preferir seguir o enunciado à risca, use `List(String)`.
+- [ ] Escrever e compilar.
+- [ ] Testar `buscar` com lista vazia (deve dar `Error(Nil)`) e com um andar.
 
-Funções:
+### Fase 5: `cenario.gleam`, começando só pelo andar 7 (1 h)
 
-- `buscar(andares, numero) -> Result(Ambiente, Nil)`, **recursiva**.
-- `explorar(ambiente, jogador) -> String`, **pura**, só devolve texto.
-
-### `cenario.gleam`
-
-Só **dados**: a função `torre() -> List(Ambiente)` e uma função por andar (`garagem()`, `triagem()`, ..., `seguranca()`). Aqui ficam os 10 enigmas, os objetos e as saídas da tabela do `organizacao.md`. Assim as regras ficam genéricas e dá para mudar a história sem mexer nelas.
-
-### `jogo.gleam`
-
-Junta tudo: estado, ações e regras.
+O `cenario` só tem **dados**. Comece com um andar para validar a arquitetura:
 
 ```gleam
+import ambiente.{type Ambiente, Ambiente, Saida, sempre}
+import enigma.{Enigma}
+import jogador.{Papel}
+import objeto.{Objeto, pegando}
+
+pub fn seguranca() -> Ambiente {
+    Ambiente(
+        andar: 7,
+        nome: "Sala de segurança",
+        descricao: "Monitores apagados. Você acordou de um cochilo e a torre está trancada.",
+        objetos: [
+            Objeto(
+                "papel do guarda",
+                "Anotação sua: 'Meu código do armário: onde eu trabalho, onde eu saio, onde eu guardo as ferramentas.'",
+                pegando("papel-guarda", Papel("Meu código do armário: onde eu trabalho, onde eu saio, onde eu guardo as ferramentas.")),
+                "livre",
+            ),
+            // computador do colega: ver Fase 7
+        ],
+        saidas: [Saida(6, sempre), Saida(5, sempre)],   // 5 = duto de ventilação
+        enigmas: [],
+    )
+}
+
+pub fn torre() -> List(Ambiente) {
+    [seguranca()]   // vai crescendo nas fases seguintes
+}
+```
+
+- [ ] Rodar `torre()` no REPL e conferir.
+
+### Fase 6: `jogo.gleam` (1,5 h)
+
+```gleam
+import ambiente.{type Ambiente}
+import cenario
+import enigma
+import gleam/list
+import jogador.{type Jogador}
+
 pub type Jogo {
-  Jogo(jogador: Jogador, andares: List(Ambiente))
+    Jogo(jogador: Jogador, andares: List(Ambiente))
 }
 
 pub type Acao {
-  Explorar
-  Interagir(objeto: String)
-  Resolver(enigma: Int, resposta: String)
-  Ir(andar: Int)
+    Explorar
+    Interagir(objeto: String)
+    Resolver(enigma: Int, resposta: String)
+    Ir(andar: Int)
+}
+
+/// Estado inicial: guarda no 7º andar.
+pub fn novo() -> Jogo {
+    Jogo(jogador: jogador.novo("Guarda", 7), andares: cenario.torre())
+}
+
+pub fn ambiente_atual(jogo: Jogo) -> Result(Ambiente, Nil) {
+    ambiente.buscar(jogo.andares, jogo.jogador.localizacao)
+}
+
+/// Vai para outro andar, se a saída estiver aberta.
+pub fn ir(jogo: Jogo, destino: Int) -> Jogo {
+    case ambiente_atual(jogo) {
+        Error(_) -> jogo
+        Ok(atual) ->
+            case ambiente.saida_aberta(atual, destino, jogo.jogador) {
+                True -> Jogo(..jogo, jogador: jogador.mover(jogo.jogador, destino))
+                False -> jogo
+            }
+    }
+}
+
+/// Interage com um objeto do andar atual.
+pub fn interagir(jogo: Jogo, nome: String) -> Jogo {
+    case ambiente_atual(jogo) {
+        Error(_) -> jogo
+        Ok(atual) ->
+            case list.find(atual.objetos, fn(o) { o.nome == nome }) {
+                Ok(obj) -> Jogo(..jogo, jogador: obj.interacao(jogo.jogador))
+                Error(_) -> jogo
+            }
+    }
+}
+
+/// Tenta resolver um enigma do andar atual.
+pub fn resolver(jogo: Jogo, id: Int, resposta: String) -> Jogo {
+    case ambiente_atual(jogo) {
+        Error(_) -> jogo
+        Ok(atual) ->
+            case list.find(atual.enigmas, fn(e) { e.id == id }) {
+                Ok(e) ->
+                    Jogo(..jogo, jogador: enigma.resolver_enigma(e, resposta, jogo.jogador))
+                Error(_) -> jogo
+            }
+    }
+}
+
+/// Aplica uma ação e devolve o novo estado.
+pub fn aplicar(jogo: Jogo, acao: Acao) -> Jogo {
+    case acao {
+        Explorar -> jogo
+        Interagir(nome) -> interagir(jogo, nome)
+        Resolver(id, resposta) -> resolver(jogo, id, resposta)
+        Ir(andar) -> ir(jogo, andar)
+    }
+}
+
+/// Executa uma lista de ações em sequência.
+pub fn executar(jogo: Jogo, acoes: List(Acao)) -> Jogo {
+    list.fold(acoes, jogo, aplicar)
+}
+
+/// O jogador venceu quando o enigma 10 está resolvido.
+pub fn venceu(jogo: Jogo) -> Bool {
+    jogador.resolvido(jogo.jogador, 10)
 }
 ```
 
-| Função | Papel |
-|---|---|
-| `novo() -> Jogo` | estado inicial (jogador no 7° andar) |
-| `aplicar(jogo, acao) -> Jogo` | `case` sobre `Acao`, devolve novo estado |
-| `executar(jogo, acoes) -> Jogo` | `list.fold(acoes, jogo, aplicar)` |
-| `ir(jogo, andar)` | valida se o andar está em `saidas` do atual |
-| `interagir(jogo, nome)` | `list.find` do objeto no ambiente atual |
-| `resolver(jogo, id, resposta)` | localiza o enigma e chama `resolver_enigma` |
-| `venceu(jogo) -> Bool` | `EnigmaResolvido(10)` presente nas flags |
+- [ ] Escrever e compilar.
+- [ ] No REPL: `novo() |> ir(6)` muda o andar; `novo() |> ir(3)` **não** muda (sem saída direta).
+- [ ] Primeiro teste em `jogo_test.gleam` (ver Fase 9).
 
-### `menus.gleam`
+### Fase 7: Os 7 andares completos e os 10 enigmas (3 a 4 h)
 
-Única camada com `io`. Funções do menu recebem e devolvem o `Jogo`, imprimindo o texto antes:
+Esta é a parte mais longa. **Mecanismo recomendado** (decisão que simplifica): 5 puzzles são **interações com objetos** (`interagir`) e 5 são **enigmas com resposta digitada** (`resolver`).
+
+#### Tabela de implementação dos 10 enigmas
+
+| # | Andar | Mecanismo | Requisito | Resposta | Efeito |
+|---|---|---|---|---|---|
+| 1 | 3 | Objeto `alavanca` | nenhum | | `EnergiaLigada` + `EnigmaResolvido(1)` |
+| 2 | 6 | Objeto `notebook` | `CaboEnergia` | | consome o cabo, `NotebookLigado`, `EnigmaResolvido(2)`, recebe `Papel("Código 1540. Dono: colega da sala de segurança")` |
+| 3 | 5 | **Enigma** (porta com teclado) | nenhum | `2486` | `PortaPlacasAberta` |
+| 4 | 5 | Objeto `caixa de placas` | `PeDeCabra` + `PortaPlacasAberta` | | recebe `BotaoAtivacao("vermelho")` + `Papel("O portão só abre com a chave e os dois botões, vermelho primeiro, azul depois.")`, `EnigmaResolvido(4)` |
+| 5 | 4 | Objeto `grade do duto` | `PeDeCabra` | | `EnigmaResolvido(5)` (abre a `Saida(2, ...)` do andar 4) |
+| 6 | 4 | **Enigma** (painel de baterias) | nenhum | `20 55 90` | recebe `BotaoAtivacao("azul")` |
+| 7 | 3 | **Enigma** (armário) | nenhum | `713` | recebe `PeDeCabra` |
+| 8 | 2 | Objeto `painel da esteira` | `CaboEnergia` | | consome o cabo, `EsteiraLigada`, `EnigmaResolvido(8)` |
+| 9 | 2 | **Enigma** (caixas de separação) | `EsteiraLigada` | `metal` | recebe `Chave` |
+| 10 | 1 | **Enigma** (portão) | `Chave` + botão vermelho + botão azul | `vermelho azul` | fim de jogo (`venceu`) |
+
+> No enigma 10, se quiser usar vida: resposta errada (por exemplo, `azul vermelho`) = `perder_vida`.
+
+#### Objetos por andar (nomes sugeridos, sem acento, minúsculos)
+
+| Andar | Objetos | Saídas |
+|---|---|---|
+| 1 Garagem | `portao`, `papel da parede` | saída do jogo (via enigma 10) ou 2 |
+| 2 Triagem | `painel da esteira`, `caixa de metal`, `caixa de plastico`, `caixa de vidro` | 1 ou 3 |
+| 3 Armazém | `alavanca` (quadro de energia), `cabo de energia`, `armario` | 2 ou 4 |
+| 4 Baterias | `prateleira de baterias`, `cabo de energia`, `grade do duto`, `painel de baterias` | 3, 5 ou **2 (só se `EnigmaResolvido(5)`)** |
+| 5 Placas | `porta com teclado`, `caixa de placas` | 4 ou 6 |
+| 6 Computadores | `notebook` | 5 ou 7 |
+| 7 Segurança | `papel do guarda`, `computador do colega` | 6 ou 5 (duto) |
+
+Exemplos de objetos (use `depois`, `exigindo`, `pegando`, `ativando`):
 
 ```gleam
-pub fn m1(j: Jogo) -> Jogo   // explorar ambiente
-pub fn m2(j: Jogo) -> Jogo   // consultar inventário
-pub fn m3(j: Jogo) -> Jogo   // examinar enigmas
+// Enigma 1: alavanca
+Objeto("alavanca", "Você puxa a alavanca. A energia volta.",
+    depois(ativando(EnergiaLigada), ativando(EnigmaResolvido(1))), "desligada")
+
+// Enigma 2: notebook (consome o cabo, liga e entrega o papel)
+Objeto("notebook", "O notebook liga e mostra um código.",
+    exigindo(CaboEnergia,
+        depois(consumindo(CaboEnergia),
+        depois(ativando(NotebookLigado),
+        depois(ativando(EnigmaResolvido(2)),
+               pegando("papel-codigo", Papel("Código 1540. Dono: colega da sala de segurança")))))),
+    "sem bateria")
+
+// Computador do colega (andar 7): precisa de energia e do notebook ligado
+Objeto("computador do colega", "Você entra no computador.",
+    exigindo_flag(EnergiaLigada,
+        exigindo_flag(NotebookLigado,
+            depois(pegando("papel-senha", Papel("Senha da porta das placas: 2486")),
+                   pegando("papel-chaveiro", Papel("O chaveiro do guarda é de metal."))))),
+    "desligado")
 ```
 
-Mais `exit()`, `display_main_menu()` e os atalhos de ação (`ir`, `interagir`, `resolver`). O enunciado permite adaptar `m1()`, `m2()` etc.
+Saída condicional do andar 4 (duto):
 
----
-
-## 4. Como o jogador joga (REPL)
-
-O estado passa de uma chamada para a próxima com `let`:
-
-```
-> let j = novo()
-> let j1 = m1(j)
-> let j2 = ir(j1, 6)
-> let j3 = interagir(j2, "notebook")
+```gleam
+Saida(2, fn(j) { jogador.resolvido(j, 5) })
 ```
 
-Ou com pipe:
+Pistas do painel de baterias (enigma 6): baterias com 20%, 55% e 90% e o papel colado "Ligue da menos carregada para a mais carregada". A solução `20 55 90` precisa estar dedutível pela descrição.
 
+Passos:
+- [ ] Implementar `garagem()`, `triagem()`, `armazem()`, `baterias()`, `placas()`, `computadores()`, `seguranca()` (uma por vez, compilando).
+- [ ] Preencher `torre()` com os 7 andares.
+- [ ] Escrever `descricao` e `pistas` que façam o jogador *deduzir* as respostas (exigência do enunciado).
+- [ ] Rodar o caminho principal na mão no REPL para ver se está completo.
+
+### Fase 8: `menus.gleam` (1 h)
+
+Renomear `menu.gleam` para `menus.gleam`. É o **único** módulo com `io.println`.
+
+```gleam
+import ambiente
+import gleam/io
+import gleam/list
+import gleam/string
+import jogador
+import jogo.{type Jogo}
+
+pub fn display_main_menu() {
+    io.println("--- MENU PRINCIPAL ---")
+    io.println("m1(j): Explorar ambiente")
+    io.println("m2(j): Consultar inventário")
+    io.println("m3(j): Examinar enigmas")
+    io.println("exit(): Encerrar simulação")
+}
+
+/// Explora o ambiente atual e devolve o jogo inalterado.
+pub fn m1(j: Jogo) -> Jogo {
+    case jogo.ambiente_atual(j) {
+        Ok(a) -> io.println(ambiente.explorar(a, j.jogador))
+        Error(_) -> io.println("Você está perdido.")
+    }
+    j
+}
+
+// m2: imprimir os itens do inventário (inclusive o texto dos Papel)
+// m3: imprimir descricao e pistas dos enigmas do andar atual
+// ir / interagir / resolver: atalhos que chamam jogo.* e imprimem o resultado
 ```
-> let j = novo() |> ir(6) |> interagir("notebook")
+
+> **Cuidado:** o enunciado sugere `type MainMenu { Explorar ... }` e o seu `jogo.gleam` tem `Acao.Explorar`. Duas variantes com o mesmo nome importadas sem prefixo **dão conflito**. Renomeie (`OpExplorar`, por exemplo) ou use `jogo.Explorar` qualificado.
+
+- [ ] `display_main_menu`, `m1`, `m2`, `m3`, `exit`.
+- [ ] Atalhos `ir`, `interagir`, `resolver` que imprimem feedback (antes/depois do jogador: se mudou, imprime a `descricao` do objeto; se não, "nada acontece").
+- [ ] Mensagem de vitória quando `venceu`.
+
+### Fase 9: Testes (1,5 h)
+
+Crie `jogo_test.gleam` (confirme a sintaxe de `sgleam/check` no material de aula):
+
+```gleam
+import jogador
+import jogo.{Interagir, Ir, Resolver}
+import sgleam/check
+
+pub fn mover_examples() {
+    let j = jogo.novo() |> jogo.ir(6)
+    check.eq(j.jogador.localizacao, 6)
+}
+
+pub fn mover_invalido_examples() {
+    let j = jogo.novo() |> jogo.ir(3)
+    check.eq(j.jogador.localizacao, 7)
+}
+
+pub fn pegar_uma_vez_examples() {
+    let j =
+        jogo.novo()
+        |> jogo.executar([Ir(6), Ir(5), Ir(4), Ir(3), Interagir("cabo de energia"), Interagir("cabo de energia")])
+    check.eq(jogador.tem(j.jogador, jogador.CaboEnergia), True)
+}
+
+pub fn resposta_errada_examples() {
+    let j = jogo.novo() |> jogo.executar([Ir(6), Ir(5), Ir(4), Ir(3), Resolver(7, "000")])
+    check.eq(jogador.resolvido(j.jogador, 7), False)
+}
 ```
 
-**Para testar no SGleam:** se o REPL aceita redefinir `let j` com o mesmo nome (senão use `j1`, `j2`...) e se o `smain` permite um laço que lê comandos do terminal.
+> Compare **campos simples** (`localizacao`, `resolvido`...), não `Jogo` ou `Ambiente` inteiros: eles contêm funções e `==` sobre função não é confiável.
+
+Conjunto mínimo de testes:
+- [ ] **Por enigma:** certo muda o estado; errado não muda (10 enigmas, ao menos os 5 com resposta).
+- [ ] **Por requisito:** sem `PeDeCabra` a caixa de placas não abre; sem `CaboEnergia` o notebook não liga; sem `EnigmaResolvido(5)` o duto 4→2 está fechado.
+- [ ] **Por movimento:** andar fora das saídas não muda a localização.
+- [ ] **Idempotência:** pegar duas vezes = 1 item.
+- [ ] **Ponta a ponta:** caminho principal completo e `venceu` verdadeiro.
+
+Caminho principal como lista de `Acao` (use exatamente os nomes de objetos do `cenario`):
+
+```gleam
+pub fn caminho_principal() -> List(Acao) {
+    [
+        Interagir("papel do guarda"),
+        Ir(6), Ir(5), Ir(4), Ir(3),
+        Interagir("alavanca"),                // enigma 1
+        Interagir("cabo de energia"),
+        Resolver(7, "713"),                   // enigma 7 (pé de cabra)
+        Ir(4), Ir(5), Ir(6),
+        Interagir("notebook"),                // enigma 2
+        Ir(7),
+        Interagir("computador do colega"),    // senha 2486
+        Ir(5),                                // duto
+        Resolver(3, "2486"),                  // enigma 3
+        Interagir("caixa de placas"),         // enigma 4 (botão vermelho)
+        Ir(4),
+        Interagir("grade do duto"),           // enigma 5
+        Resolver(6, "20 55 90"),              // enigma 6 (botão azul)
+        Interagir("cabo de energia"),         // segundo cabo
+        Ir(2),                                // duto
+        Interagir("painel da esteira"),       // enigma 8
+        Resolver(9, "metal"),                 // enigma 9 (chave)
+        Ir(1),
+        Resolver(10, "vermelho azul"),        // enigma 10
+    ]
+}
+```
+
+### Fase 10: Documentação e limpeza (1 h)
+
+- [ ] `///` em todas as funções públicas e tipos.
+- [ ] Remover os `todo` e comentários de dúvida ("Provavelmente não pode...", "Não sei se...").
+- [ ] Remover imports não usados (o compilador avisa).
+- [ ] Nomes de arquivo conforme o enunciado (`menus.gleam`).
+- [ ] Um `README.md` curto: como rodar no SGleam e exemplo de partida no REPL.
+- [ ] Atualizar `organizacao.md` com o que mudou no design (`Saida`, `Coletado`, `quando`...).
+
+### Fase 11: Slides (2 h)
+
+PDF final com 10 a 15 min de fala. Roteiro (do enunciado):
+
+1. **Capa:** UEM · Ciência da Computação · Programação Funcional · Prof. Wagner Igarashi · título · tema 09 · autores · data.
+2. **Objetivo:** história, andares, motivação do jogador e condição de saída (portão da garagem).
+3. **Conceitos:** onde aparecem tipos algébricos, pattern matching, recursividade, composição e ordem superior (use a tabela A.2 com trechos de código reais).
+4. **Demonstração:** executar o caminho principal no REPL: ver um objeto (`interagir`), um enigma (`resolver`), e o final. Ensaie e tenha um plano B (prints) se o SGleam falhar.
+5. **Conclusões:** resultados, dificuldades (imutabilidade, estado sem variáveis, imports), melhorias (interface visual com `sgleam/world`).
+6. **Referências:** apenas o que você **realmente** usou (material de aula, documentação de Gleam, SGleam, contexto de lixo eletrônico).
+
+- [ ] Fazer os slides e exportar em **PDF**.
+- [ ] Ensaiar com cronômetro (10 a 15 min).
+
+### Fase 12: Entrega
+
+- [ ] Montar a pasta final: `.gleam` + testes + README + slides PDF + `organizacao.md`.
+- [ ] **Não incluir a pasta `.git`** no compactado.
+- [ ] Compactar (`.zip`), subir no Google Drive, **abrir o link em aba anônima** para conferir a permissão.
+- [ ] Enviar e-mail para **wigarashi@uem.br**:
+  - **Assunto:** `Trabalho 2 de Programação Funcional, <semestre>, 2026`
+  - **Corpo:** nome completo e RA de cada integrante + link.
 
 ---
 
-## 5. Exibição no terminal
+## Armadilhas comuns de Gleam neste projeto
 
-No REPL, o valor de uma expressão aparece com aspas e `\n` escapados. Por isso:
-
-- funções puras devolvem `String`;
-- só `menus.gleam` chama `io.println`, que imprime o texto formatado.
-
-Isso também mantém a separação entre lógica e apresentação exigida no enunciado.
-
----
-
-## 6. Testes
-
-Usar `sgleam/check` (conferir os nomes `check.eq` e o sufixo `_examples` nos exemplos da disciplina).
-
-1. **Por enigma:** resposta certa muda o estado; resposta errada não muda.
-2. **Por requisito:** sem pé de cabra, a caixa de placas não abre.
-3. **Por movimento:** ir para um andar que não está em `saidas` não muda a localização.
-4. **Ponta a ponta:** o caminho principal do `organizacao.md` como lista de `Acao`, executada com `executar` e conferida com `venceu`.
+1. **`==` com funções:** `Objeto`, `Enigma`, `Saida`, `Ambiente` e `Jogo` têm campos `fn`. Compare por `nome`/`id`/campos simples. `Jogador`, `Item` e `Flag` **não** têm funções e podem ser comparados.
+2. **Ciclo de imports:** proibido. Respeite a ordem `jogador → objeto/enigma → ambiente → cenario → jogo → menus`.
+3. **Variantes com mesmo nome:** `Explorar` em `Acao` e em `MainMenu` conflitam se importadas sem prefixo.
+4. **Imutabilidade:** nada de "mudar o jogador"; sempre `Jogador(..j, campo: novo)` e devolver o novo.
+5. **Pipe `|>`:** `x |> f(y)` vira `f(x, y)`; o valor entra como **primeiro** argumento.
+6. **Texto:** `<>` concatena; no REPL o `\n` aparece escapado, por isso só `menus.gleam` imprime.
+7. **`Papel(texto)` e `contains`:** `tem(j, Papel("..."))` exige o texto **exato**. Se precisar, escreva um `tem_papel`.
+8. **Respostas digitadas:** use `normalizar` (trim + lowercase) e evite acentos nas respostas esperadas.
+9. **`todo`:** compila com aviso, mas quebra em tempo de execução. Não pode sobrar nenhum na entrega.
 
 ---
 
-## 7. Mapeamento com o enunciado
+## Checklist final
 
-| Requisito | Onde aparece |
-|---|---|
-| Tipos algébricos | `Item`, `Flag`, `Acao`, `Jogador`, `Objeto`, `Enigma`, `Ambiente`, `Jogo` |
-| Pattern matching | `aplicar` (sobre `Acao`), `case` em `resolver_enigma`, `buscar` |
-| Recursão | `ambiente.buscar`, listas de andares/objetos |
-| Composição de funções | `depois`, pipes (`\|>`) nas ações |
-| Funções de ordem superior | `interacao`, `efeito`, `requisito`, `exigindo`, `list.fold`, `list.map` |
-| Pureza | tudo em `jogador`, `objeto`, `enigma`, `ambiente`, `jogo` |
-| Camada de apresentação | `menus.gleam` |
-| Testes unitários | `jogo_test.gleam` |
-
----
-
-## 8. Ordem de implementação
-
-1. `jogador.gleam` e `objeto.gleam`, com 2 ou 3 objetos de teste, e checar se os imports entre arquivos funcionam no SGleam.
-2. `enigma.gleam` e `ambiente.gleam`.
-3. `cenario.gleam` com 1 andar (o 7°).
-4. `jogo.gleam` (`aplicar`, `executar`) e o primeiro teste.
-5. Os 7 andares completos e os 10 enigmas.
-6. `menus.gleam`.
-7. Teste de ponta a ponta com o caminho principal.
-8. Slides (PDF) e revisão de documentação.
-
----
-
-## 9. Entrega
-
-- Arquivos-fonte `.gleam` + slides em PDF + arquivos acessórios.
-- Compactar, compartilhar por Google Drive e enviar o link para `wigarashi@uem.br`.
-- Assunto: *Trabalho 2 de Programação Funcional, Semestre, 2026*.
-- Corpo: nome completo e RA de cada integrante.
-- Apresentação oral de 10 a 15 minutos.
-# Funções por arquivo — trab_PF_2
-
-Este levantamento considera os arquivos `.gleam` presentes na pasta `code/` do ZIP enviado. É importante separar **funções já implementadas** de **funções apenas planejadas** em `storytelling/organizacao.md`.
-
-## 1. Funções encontradas no código atual
-
-| Arquivo | Função | Visibilidade | Parâmetros | Retorno | Responsabilidade |
-|---|---|---|---|---|---|
-| `jogador.gleam` | `novo` | Pública (`pub`) | `nome: String`, `andar: Int` | `Jogador` | Cria um jogador com inventário e flags vazios, 3 pontos de vida e localização inicial informada. |
-| `jogador.gleam` | `pegar` | Pública (`pub`) | `j: Jogador`, `item: Item` | `Jogador` | Adiciona um item ao inventário do jogador. |
-| `jogador.gleam` | `tem` | Pública (`pub`) | `j: Jogador`, `item: Item` | `Bool` | Verifica se o jogador possui determinado item no inventário. |
-| `jogador.gleam` | `consumir` | Pública (`pub`) | `j: Jogador`, `item: Item` | `Jogador` | Remove uma ocorrência do item do inventário. |
-| `jogador.gleam` | `remover_um` | Privada | `itens: List(Item)`, `item: Item` | `List(Item)` | Função recursiva auxiliar que remove a primeira ocorrência do item encontrado. |
-| `jogador.gleam` | `ativar` | Pública (`pub`) | `j: Jogador`, `flag: Flag` | `Jogador` | Ativa uma flag, evitando adicioná-la novamente caso já esteja ativa. |
-| `jogador.gleam` | `flag_ativa` | Pública (`pub`) | `j: Jogador`, `flag: Flag` | `Bool` | Verifica se determinada flag já está registrada no jogador. |
-| `jogador.gleam` | `resolvido` | Pública (`pub`) | `j: Jogador`, `enigma: Int` | `Bool` | Verifica se o jogador possui a flag `EnigmaResolvido(enigma)`. |
-| `jogador.gleam` | `mover` | Pública (`pub`) | `j: Jogador`, `andar: Int` | `Jogador` | Atualiza a localização do jogador para o andar informado. |
-
-## 2. Situação dos demais arquivos
-
-| Arquivo | Funções implementadas atualmente | Observação |
-|---|---|---|
-| `objeto.gleam` | Nenhuma | Contém apenas a definição planejada do tipo `Objeto`. A linha inicial está incorreta/concatenada (`import jogadorpub type Objeto`) e precisa ser corrigida. |
-| `enigma.gleam` | Nenhuma | Contém somente `import jogador`. |
-| `ambiente.gleam` | Nenhuma | Contém somente os imports de `objeto` e `enigma`. |
-| `cenario.gleam` | Nenhuma | Contém somente `import ambiente`. |
-| `jogo.gleam` | Nenhuma | Contém somente `import cenario`. |
-| `menu.gleam` | Nenhuma | Contém somente `import jogo`. |
-
-## 3. Funções previstas no planejamento (`storytelling/organizacao.md`)
-
-Estas funções aparecem no documento de organização, mas **ainda não estão implementadas nos arquivos `.gleam` do ZIP**.
-
-| Arquivo previsto | Função | Responsabilidade planejada |
-|---|---|---|
-| `objeto.gleam` | `pegando(item)` | Produzir uma função de interação que adiciona o item ao inventário. |
-| `objeto.gleam` | `ativando(flag)` | Produzir uma função de interação que ativa uma flag do jogador. |
-| `objeto.gleam` | `exigindo(item, efeito)` | Produzir uma interação que só executa o efeito se o jogador possuir o item exigido. |
-| `objeto.gleam` | `depois(f, g)` | Compor dois efeitos, executando um e depois o outro. |
-| `enigma.gleam` | `resolver_enigma(enigma, resposta, jogador)` | Verificar requisito e resposta; aplicar o efeito e registrar o enigma como resolvido quando correto. |
-| `ambiente.gleam` | `buscar(andares, numero)` | Buscar recursivamente um ambiente pelo número do andar, retornando `Result(Ambiente, Nil)`. |
-| `ambiente.gleam` | `explorar(ambiente, jogador)` | Produzir uma descrição textual do ambiente para o jogador. |
-| `cenario.gleam` | `torre()` | Construir e devolver a lista dos sete andares. |
-| `cenario.gleam` | `garagem()` | Construir o ambiente do primeiro andar. |
-| `cenario.gleam` | `triagem()` | Construir o ambiente do segundo andar. |
-| `cenario.gleam` | `armazem()` | Construir o ambiente do terceiro andar. |
-| `cenario.gleam` | `baterias()` | Construir o ambiente do quarto andar. |
-| `cenario.gleam` | `placas()` | Construir o ambiente do quinto andar. |
-| `cenario.gleam` | `computadores()` | Construir o ambiente do sexto andar. |
-| `cenario.gleam` | `seguranca()` | Construir o ambiente do sétimo andar. |
-| `jogo.gleam` | `novo()` | Criar o estado inicial do jogo. |
-| `jogo.gleam` | `aplicar(jogo, acao)` | Aplicar uma ação ao estado do jogo. |
-| `jogo.gleam` | `executar(jogo, acoes)` | Executar uma sequência de ações. |
-| `jogo.gleam` | `ir(jogo, andar)` | Validar e realizar a movimentação para outro andar. |
-| `jogo.gleam` | `interagir(jogo, nome)` | Localizar um objeto no ambiente atual e executar sua interação. |
-| `jogo.gleam` | `resolver(jogo, id, resposta)` | Localizar e tentar resolver um enigma. |
-| `jogo.gleam` | `venceu(jogo)` | Verificar se a condição de vitória foi alcançada. |
-| `menus.gleam` (o ZIP contém `menu.gleam`) | `m1(j)` | Exibir informações/explorar o ambiente. |
-| `menus.gleam` (o ZIP contém `menu.gleam`) | `m2(j)` | Consultar o inventário. |
-| `menus.gleam` (o ZIP contém `menu.gleam`) | `m3(j)` | Examinar os enigmas. |
-| `menus.gleam` (o ZIP contém `menu.gleam`) | `exit()` | Encerrar a execução/menu. |
-| `menus.gleam` (o ZIP contém `menu.gleam`) | `display_main_menu()` | Exibir o menu principal. |
-
-## 4. Observações
-
-- `jogador.gleam` é o único arquivo que contém funções implementadas no ZIP analisado.
-- `objeto.gleam` ainda não contém as fábricas de efeitos descritas no planejamento.
-- O planejamento usa o nome `menus.gleam`, mas o arquivo enviado chama-se `menu.gleam`; convém padronizar o nome e os imports.
-- O documento de planejamento cita `consumir` e `mover` como operações do jogador? Na versão atual do código elas existem; `consumir` não aparece na lista resumida do planejamento.
-- Os nomes das funções de `cenario.gleam` são uma proposta de organização. Confirmem os nomes finais antes de implementar.
+- [ ] 6 módulos exigidos existem com os nomes certos (`menus.gleam` incluso)
+- [ ] Tipos algébricos, pattern matching, recursão, composição e ordem superior **identificáveis** no código
+- [ ] Lógica pura; `io.println` só em `menus.gleam`
+- [ ] 7 andares, 10 enigmas, 5 tipos de objeto funcionando
+- [ ] Caminho principal testado de ponta a ponta (`venceu` verdadeiro)
+- [ ] Testes unitários (`jogo_test.gleam`) passando
+- [ ] Documentação `///` em tudo que é público; sem `todo`
+- [ ] Slides PDF prontos e ensaiados (10 a 15 min)
+- [ ] Zip sem `.git`, link do Drive aberto para o professor
+- [ ] E-mail enviado com assunto correto e nome + RA de todos
