@@ -57,3 +57,4 @@ pub fn depois(
 ) -> fn(Jogador) -> Jogador {
     fn(j) { g(f(j)) }
 }
+

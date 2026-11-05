@@ -54,7 +54,7 @@ pub fn sala_computadores() -> Ambiente {
             Objeto(
                 "Notebook funcional",
                 "Um notebook aparentemente funcional que precisa de um pouco de carga de bateria"
-                // consumindo() + ativando() -> tenho que ver como fazer isso, talvez transformar em uma lista
+                depois(consumir(Item(CaboEnergia)), ativando(NotebookLigado))
             )
         ]
     )

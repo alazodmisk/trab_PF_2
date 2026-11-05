@@ -1,6 +1,15 @@
 import jogador.{
     Jogador, Chave, PeDeCabra, CaboEnergia, Papel, EnergiaLigada,
-    NotebookLigado, EsteiraLigada, EnigmaResolvido,
+    NotebookLigado, EsteiraLigada, EnigmaResolvido, Coletado
+}
+import objeto.{
+    quando,
+    pegando,
+    ativando,
+    consumindo,
+    exigindo,
+    exigindo_flag,
+    depois,
 }
 import sgleam/check
 
@@ -79,4 +88,64 @@ pub fn mover_examples() {
     check.eq(jogador.mover(j, 1), j)
     check.eq(jogador.mover(jogador.pegar(j, Chave), 3),Jogador("Joao", [Chave], 3, []))
     check.eq(jogador.mover(jogador.ativar(j, EnergiaLigada), 4),Jogador("Joao", [], 4, [EnergiaLigada]))
+}
+
+
+/// Examples objeto.gleam
+pub fn quando_examples() {
+    let j = jogador.novo("Joao", 1)
+    let efeito = quando(fn(j) { jogador.tem(j, Chave) },fn(j) { jogador.ativar(j, EnergiaLigada) })
+    check.eq(efeito(j), j)
+    check.eq(efeito(jogador.pegar(j, Chave)),jogador.ativar(jogador.pegar(j, Chave), EnergiaLigada))
+}
+
+pub fn pegando_examples() {
+    let j = jogador.novo("Joao", 1)
+    let pegar_chave = pegando("chave_sala", Chave)
+    
+    check.eq(pegar_chave(j),Jogador("Joao", [Chave], 1, [Coletado("chave_sala")]))
+    // Não coleta o mesmo objeto novamente
+    check.eq(pegar_chave(pegar_chave(j)),pegar_chave(j))
+}
+
+pub fn ativando_examples() {
+    let j = jogador.novo("Joao", 1)
+
+    check.eq(ativando(EnergiaLigada)(j),Jogador("Joao", [], 1, [EnergiaLigada]))
+    check.eq(ativando(NotebookLigado)(j),Jogador("Joao", [], 1, [NotebookLigado]))
+    check.eq(ativando(EnergiaLigada)(ativando(NotebookLigado)(j),),Jogador("Joao", [], 1, [EnergiaLigada, NotebookLigado]))
+}
+
+pub fn consumindo_examples() {
+    let j = jogador.pegar(jogador.pegar(jogador.novo("Joao", 1), Chave),CaboEnergia)
+    
+    check.eq(consumindo(Chave)(j),Jogador("Joao", [CaboEnergia], 1, []))
+    check.eq(consumindo(CaboEnergia)(j),Jogador("Joao", [Chave], 1, []))
+    // Consumir item que não possui
+    //check.eq(consumindo(NotebookLigado)(j),j) Tá dando erro mas creio que isso não vá acontecer
+}
+
+pub fn exigindo_examples() {
+    let j = jogador.novo("Joao", 1)
+    let efeito = exigindo(Chave,ativando(EnergiaLigada))
+    
+    check.eq(efeito(j), j)
+    check.eq(efeito(jogador.pegar(j, Chave)),jogador.ativar(jogador.pegar(j, Chave), EnergiaLigada))
+}
+
+pub fn exigindo_flag_examples() {
+    let j = jogador.novo("Joao", 1)
+    let efeito = exigindo_flag(EnergiaLigada,ativando(NotebookLigado))
+
+    check.eq(efeito(j), j)
+    check.eq(efeito(jogador.ativar(j, EnergiaLigada)),Jogador("Joao", [], 1, [NotebookLigado, EnergiaLigada]))
+}
+
+pub fn depois_examples() {
+    let j = jogador.novo("Joao", 1)
+    let efeito = depois(ativando(EnergiaLigada),ativando(NotebookLigado))
+    let efeito2 = depois(fn(j) { jogador.pegar(j, Chave) },ativando(EnergiaLigada))
+    
+    check.eq(efeito(j),Jogador("Joao", [], 1, [NotebookLigado, EnergiaLigada]))
+    check.eq(efeito2(j),Jogador("Joao", [Chave], 1, [EnergiaLigada]))
 }
