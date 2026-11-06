@@ -1,3 +1,6 @@
+import gleam/int
+import gleam/list
+
 // Item guarda o que o jogador carrega. Flag guarda o que o jogador 
 // já fez ou mudou no mundo, como a alavanca puxada ou um enigma 
 // resolvido. A separação existe porque “energia ligada” não é um 
@@ -79,19 +82,9 @@ pub fn ativar(j: Jogador, flag: Flag) -> Jogador {
 }
 
 pub fn flag_ativa(j: Jogador, flag: Flag) -> Bool {
-    verifica_flag(j.flags, flag)
+    list.contains(j.flags, flag) //Provavelmente não pode usar esse tipo de função
 }
 
-fn verifica_flag(flags: List(Flag), flag: Flag) -> Bool {
-    case flags {
-        [] -> False
-        [primeira, ..resto] ->
-            case primeira == flag {
-                True -> True
-                False -> verifica_flag(resto, flag)
-            }
-    }
-}
 pub fn resolvido(j: Jogador, enigma: Int) -> Bool {
     flag_ativa(j, EnigmaResolvido(enigma))
 }

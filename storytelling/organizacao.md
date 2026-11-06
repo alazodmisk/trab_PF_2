@@ -22,72 +22,114 @@ Andares X podem ter caminhos para outros andares que não sejam o X+1 nem o X-1,
 - Andar 4 (Baterias): enigmas 5 e 6
 - Andar 2 (Triagem): enigmas 8 e 9
 
-##### Tabela dos andares
-| ANDAR | ENIGMA/SITUAÇÕES | OBJETOS PRESENTES | PARA ONDE VAI |
-|--|--|--|--|
-| 1 | 10 | Portão da garagem, papel com anotações na parede | Saída do jogo (fim) ou 2° |
-| 2 | 8 e 9 | Painel da esteira, 3 caixas de separação (metal, plástico, vidro), chaves (dentro da caixa certa) | 1° ou 3° |
-| 3 | 7 | Quadro de energia com alavanca, cabo de energia, armário trancado com o pé de cabra | 2° ou 4° |
-| 4 | 5 e 6 | Prateleira de baterias, segundo cabo de energia, grade do duto de ventilação, botão de ativação (azul) | 3°, 5° ou 2° (duto de ventilação) |
-| 5 | 3 e 4 | Porta com teclado, caixa de placas lacrada, botão de ativação (vermelho), papel com anotações | 4° ou 6° |
-| 6 | 2 | Notebook contendo infos | 5° ou 7° |
-| 7 | 1 | Papel com anotações do guarda, computador do colega contendo a senha da porta da sala de placas eletrônicas | 6° ou 5° (duto de ventilação) |
-
-##### Enigmas
-1. Os computadores da sala de segurança estão todos desligados e todas as tomadas do seu e dos outros computadores estão desativadas. Para ativar, o jogador deve puxar a alavanca no quadro de energia presente no andar das ferramentas (3° andar). Você tem duas opções para descer:
-   
-        Descer pelas escadas: 6° andar
-        Entrar no duto de ventilação: 5° Andar
-
-2. Dentre os computadores descartados você encontra um notebook com um led piscando, você percebe que o led indica falta de bateria e por isso é impossível ligá-lo. Você deve encontrar um cabo de energia para ligá-lo:
-
-        Ao usar o cabo de energia no computador, o mesmo revela um código 1540 e diz que o antigo usuário do notebook é o seu colega de trabalho na sala de segurança
-
-   Obs.: o cabo de energia está no 3° andar. O jogador precisa voltar ao 6° depois de passar pelo armazém.
-
-3. (Andar das placas eletrônicas) A porta da sala de placas está trancada por um teclado numérico de 4 dígitos. A senha está guardada no computador do colega, no 7° andar. O jogador precisa ter religado a energia (enigma 1) e usar o código 1540 (enigma 2) para entrar no computador, que revela a senha:
-
-        Senha da porta: 2486
-
-4. (Sala de placas) Dentro da sala há uma caixa de placas lacrada com lacre de metal. O jogador precisa usar o pé de cabra para abri-la. Dentro está uma placa com um botão de ativação vermelho e um papel com anotações:
-
-        "O portão da garagem só abre com a chave e com os dois botões, vermelho primeiro, azul depois."
-
-5. (Andar das baterias) O duto de ventilação que leva ao 2° andar está coberto por uma grade parafusada. O jogador precisa usar o pé de cabra para arrancá-la, abrindo o atalho:
-
-        Duto de ventilação: 2° andar
-
-6. (Andar das baterias) Um painel trancado guarda o segundo botão de ativação (azul). Para destravá-lo, o jogador deve encaixar 3 baterias nos soquetes. Cada bateria mostra a carga no visor (20%, 55% e 90%) e um papel colado no painel diz: "Ligue da menos carregada para a mais carregada." Ao encaixar na ordem certa, o painel se abre:
-
-        Botão de ativação azul liberado
-
-   Obs.: um segundo cabo de energia fica jogado ao lado da prateleira de baterias. O jogador vai precisar dele no 2° andar.
-
-7. (Armazém de ferramentas) Além da alavanca (enigma 1) e do cabo de energia, há um armário trancado com cadeado de 3 dígitos, onde está o pé de cabra. A dica está no papel com anotações do guarda, no 7° andar: "Meu código do armário: onde eu trabalho, onde eu saio, onde eu guardo as ferramentas."
-
-        Código do armário: 713 (7° andar, garagem no 1°, armazém no 3°)
-
-8. (Triagem) O painel da esteira de separação está sem energia e as chaves do guarda caíram em algum ponto dela. O jogador deve conectar o cabo de energia do 4° andar ao painel para religar a esteira:
-
-        Esteira ligada: as caixas de separação ficam acessíveis
-
-9. (Triagem) Com a esteira ligada, as chaves caem junto com o lixo e precisam ser separadas. Há 3 caixas: metal, plástico e vidro. O papel com anotações do computador do colega (7° andar) diz que o chaveiro é de metal. O jogador coloca o objeto na caixa certa e recebe:
-
-        Chaves da garagem (e do guarda)
-
-10. (Garagem) O portão da garagem tem uma fechadura e dois botões de ativação. O jogador precisa usar a chave da garagem e apertar os botões na ordem indicada no papel da parede: vermelho primeiro, azul depois. Se errar a ordem, o portão trava por alguns segundos e é preciso tentar de novo.
-
-        Portão aberto: o guarda escapa e o jogo termina
-
-##### Sugestão de caminho principal (resolução)
-1. 7° (papel do guarda com a dica do armário) → descer até o 3° → puxar a alavanca (enigma 1) e pegar o cabo de energia.
-2. Abrir o armário com 713 (enigma 7) e pegar o pé de cabra.
-3. Subir ao 6° → ligar o notebook (enigma 2) e obter o código 1540.
-4. Subir ao 7° → usar 1540 no computador do colega e obter a senha 2486.
-5. Descer ao 5° → abrir a porta (enigma 3) e abrir a caixa com o pé de cabra (enigma 4) → botão vermelho.
-6. Descer ao 4° → arrancar a grade (enigma 5), resolver o painel das baterias (enigma 6) → botão azul e segundo cabo.
-7. Duto até o 2° → religar a esteira (enigma 8) e separar o lixo (enigma 9) → chaves.
-8. Descer ao 1° → portão (enigma 10) → fim.
+## 2. Tabela dos andares com seus enigmas
+ 
+| Andar | Nome | Enigmas | Objetos presentes | Para onde vai |
+|---|---|---|---|---|
+| 1 | Garagem | **10** | Portão (fechadura + 2 botões de ativação), papel da parede (ordem dos botões) | Saída do jogo (fim) ou 2º |
+| 2 | Triagem | **8** e **9** | Painel da esteira, caixa de metal, caixa de plástico, caixa de vidro, chaveiro do guarda (cai na esteira) | 1º ou 3º |
+| 3 | Armazém de ferramentas | **7** | Quadro de energia com alavanca (resolve o enigma 1), cabo de energia, armário trancado com cadeado de 3 dígitos (pé de cabra dentro) | 2º ou 4º |
+| 4 | Baterias | **5** e **6** | Prateleira de baterias, painel de baterias (3 baterias + papel colado; botão azul dentro), cabo de energia solto, grade do duto de ventilação | 3º, 5º ou 2º (duto, só após o enigma 5) |
+| 5 | Placas eletrônicas | **3** e **4** | Porta com teclado de 4 dígitos, caixa de placas lacrada (botão vermelho e papel dentro) | 4º ou 6º |
+| 6 | Computadores descartados | **2** | Notebook com led piscando | 5º ou 7º |
+| 7 | Segurança (início) | **1** | Papel com anotações do guarda, computador do colega | 6º ou 5º (duto) |
+ 
+---
+ 
+## 3. Enigmas corrigidos
+ 
+### Enigma 1: Sem energia (apresentado no 7º, resolvido no 3º)
+Os computadores da sala de segurança estão desligados e as tomadas, desativadas. Para ligar a energia, o jogador puxa a alavanca do quadro de energia do **armazém de ferramentas (3º andar)**. Para descer, há duas opções: escadas (6º andar) ou duto de ventilação (5º andar, só desce).
+ 
+- **Mecanismo:** objeto `alavanca` (andar 3).
+- **Requisito:** nenhum.
+- **Efeito:** `EnergiaLigada` + `EnigmaResolvido(1)`.
+### Enigma 2: O notebook sem bateria (6º andar)
+Entre os computadores descartados há um notebook com um led piscando: falta de bateria. Com o cabo de energia (3º andar) e a energia ligada, ele liga e revela o código **1540** e que o antigo usuário é o colega da sala de segurança.
+ 
+- **Mecanismo:** objeto `notebook`.
+- **Requisito:** `CaboEnergia` + `EnergiaLigada`.
+- **Efeito:** consome o cabo; `NotebookLigado`; `EnigmaResolvido(2)`; o jogador recebe `Papel("Código 1540. Usuário: colega da sala de segurança")`.
+### Enigma 3: A porta da sala de placas (5º andar)
+A porta tem um teclado de 4 dígitos. A senha está no computador do colega (7º andar), que só funciona com a energia ligada e o notebook ligado (a pista do código 1540). O computador entrega dois papéis: *"Senha da porta das placas: 2486"* e *"O chaveiro do guarda é de metal."*
+ 
+- **Mecanismo:** enigma com resposta digitada (porta com teclado).
+- **Resposta:** `2486`.
+- **Efeito:** `PortaPlacasAberta` + `EnigmaResolvido(3)`.
+### Enigma 4: A caixa de placas lacrada (5º andar)
+Dentro da sala de placas há uma caixa lacrada com lacre de metal. O pé de cabra abre. Dentro: uma placa com o **botão de ativação vermelho** e um papel: *"O portão da garagem só abre com a chave e com os dois botões de ativação."*
+ 
+- **Mecanismo:** objeto `caixa de placas`.
+- **Requisito:** `PeDeCabra` + `PortaPlacasAberta`.
+- **Efeito:** recebe `BotaoAtivacao("vermelho")` e o papel; `EnigmaResolvido(4)`.
+### Enigma 5: A grade do duto (4º andar)
+O duto de ventilação que leva ao 2º andar está coberto por uma grade parafusada. O pé de cabra a arranca.
+ 
+- **Mecanismo:** objeto `grade do duto`.
+- **Requisito:** `PeDeCabra`.
+- **Efeito:** `EnigmaResolvido(5)`, que abre a saída 4 → 2.
+### Enigma 6: O painel de baterias (4º andar)
+Um painel trancado guarda o botão de ativação azul. Para abri-lo, encaixam-se 3 baterias com carga 20%, 55% e 90%. Um papel colado no painel diz: *"Ligue da menos carregada para a mais carregada."*
+ 
+- **Mecanismo:** enigma com resposta digitada.
+- **Resposta:** `20 55 90`.
+- **Efeito:** recebe `BotaoAtivacao("azul")`; `EnigmaResolvido(6)`.
+- **Obs.:** o segundo cabo de energia fica solto ao lado da prateleira (objeto separado).
+### Enigma 7: O armário de ferramentas (3º andar)
+O armário trancado, com cadeado de 3 dígitos, guarda o pé de cabra. A pista é o papel do guarda (7º andar): *"Meu código do armário: onde eu trabalho, onde eu saio, onde eu guardo as ferramentas."* → 7 (segurança), 1 (garagem), 3 (armazém).
+ 
+- **Mecanismo:** enigma com resposta digitada.
+- **Resposta:** `713`.
+- **Efeito:** recebe `PeDeCabra`; `EnigmaResolvido(7)`.
+- **Atenção:** as descrições dos andares precisam informar o número ("Garagem, 1º andar"), senão a pista não é dedutível.
+### Enigma 8: A esteira da triagem (2º andar)
+O painel da esteira está sem energia e as chaves do guarda caíram nela. O cabo de energia do 4º andar, com a energia do prédio ligada, religa a esteira.
+ 
+- **Mecanismo:** objeto `painel da esteira`.
+- **Requisito:** `CaboEnergia` + `EnergiaLigada`.
+- **Efeito:** consome o cabo; `EsteiraLigada`; `EnigmaResolvido(8)`.
+### Enigma 9: Separando o lixo (2º andar)
+Com a esteira ligada, o chaveiro do guarda desce junto com o lixo e precisa ir para a caixa certa (metal, plástico ou vidro). O papel do computador do colega diz que o chaveiro é de **metal**.
+ 
+- **Mecanismo:** enigma com resposta digitada.
+- **Requisito:** `EsteiraLigada`.
+- **Resposta:** `metal`.
+- **Efeito:** recebe `Chave` (chaves da garagem e do guarda); `EnigmaResolvido(9)`.
+### Enigma 10: O portão da garagem (1º andar)
+O portão tem uma fechadura e dois botões de ativação. O papel da parede diz: *"Acione na ordem: vermelho primeiro, azul depois."*
+ 
+- **Mecanismo:** enigma com resposta digitada.
+- **Requisito:** `Chave` + `BotaoAtivacao("vermelho")` + `BotaoAtivacao("azul")`.
+- **Resposta:** `vermelho azul`.
+- **Efeito:** `EnigmaResolvido(10)`: o guarda escapa e o jogo termina.
+- **Erro (opcional):** ordem errada custa 1 ponto de vida.
+---
+ 
+## 4. Dependências entre enigmas
+ 
+| Enigma | Precisa de | Pista vem de |
+|---|---|---|
+| 1 | nada | descrição do andar 7 |
+| 2 | cabo (3º andar), enigma 1 | descrição do notebook |
+| 3 | senha 2486 | computador do colega (precisa dos enigmas 1 e 2) |
+| 4 | pé de cabra (enigma 7), enigma 3 | descrição da caixa |
+| 5 | pé de cabra (enigma 7) | descrição da grade |
+| 6 | nada | papel colado no painel |
+| 7 | nada | papel do guarda (7º andar) |
+| 8 | cabo (4º andar), enigma 1 | descrição do painel |
+| 9 | enigma 8 | papel do computador do colega |
+| 10 | chave (9), botão vermelho (4), botão azul (6) | papel da caixa + papel da parede |
+ 
+### Caminho principal (confirmado: o jogo é resolvível)
+ 
+1. 7º: pegar o papel do guarda → descer (escadas ou duto) até o 3º.
+2. 3º: alavanca (**1**) → pegar o cabo → armário `713` (**7**) → pé de cabra.
+3. 6º: notebook com o cabo (**2**) → código 1540.
+4. 7º: computador do colega → senha 2486 e "chaveiro é de metal".
+5. 5º (duto): porta `2486` (**3**) → caixa com pé de cabra (**4**) → botão vermelho.
+6. 4º: grade (**5**) → painel `20 55 90` (**6**) → botão azul → pegar o 2º cabo.
+7. Duto até o 2º: esteira com o cabo (**8**) → caixa `metal` (**9**) → chave.
+8. 1º: portão `vermelho azul` (**10**) → fim.
 
 
 # Torre do Lixo Eletrônico: organização do projeto

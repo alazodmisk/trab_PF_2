@@ -11,6 +11,9 @@ import objeto.{
     exigindo_flag,
     depois,
 }
+import enigma.{
+    type Enigma, Enigma
+}
 import sgleam/check
 
 
@@ -148,4 +151,52 @@ pub fn depois_examples() {
     
     check.eq(efeito(j),Jogador("Joao", [], 1, [NotebookLigado, EnergiaLigada]))
     check.eq(efeito2(j),Jogador("Joao", [Chave], 1, [EnergiaLigada]))
+}
+
+
+/// Examples enigma.gleam
+pub fn normalizar_examples() {
+    check.eq(enigma.normalizar("OLA"), "ola")
+    check.eq(enigma.normalizar("  Computador  "), "computador")
+    check.eq(enigma.normalizar("EnIgMa"), "enigma")
+    check.eq(enigma.normalizar(" resposta "), "resposta")
+    check.eq(enigma.normalizar(""), "")
+    check.eq(enigma.normalizar("   "), "")
+    check.eq(enigma.normalizar("Sala de Computadores"), "sala de computadores")
+}
+
+pub fn resolver_enigma_examples() {
+    let j = jogador.novo("Joao", 1)
+
+    let enigma = Enigma(
+        id: 1,
+        descricao: "Qual é a senha?",
+        solucao: "computador",
+        pistas: ["Começa com C"],
+        requisito: fn(j) { True },
+        efeito: fn(j) { jogador.ativar(j, jogador.EnergiaLigada) },
+    )
+    // Resposta correta e requisito cumprido
+    check.eq(enigma.resolver_enigma(enigma, "computador", j),jogador.ativar(j, jogador.EnergiaLigada)|> jogador.ativar(jogador.EnigmaResolvido(1)))
+    // Resposta correta com espaços e letras maiúsculas
+    check.eq(enigma.resolver_enigma(enigma, "  COMPUTADOR  ", j),jogador.ativar(j, jogador.EnergiaLigada)|> jogador.ativar(jogador.EnigmaResolvido(1)))
+    // Resposta incorreta
+    check.eq(enigma.resolver_enigma(enigma, "notebook", j),j)
+
+    // Requisito não cumprido
+    let enigma_bloqueado = Enigma(
+        id: 2,
+        descricao: "Qual é a senha?",
+        solucao: "computador",
+        pistas: [],
+        requisito: fn(j) { False },
+        efeito: fn(j) { jogador.ativar(j, jogador.EnergiaLigada) },
+    )
+    check.eq(enigma.resolver_enigma(enigma_bloqueado, "computador", j),j)
+    // Enigma já resolvido
+    
+    let j_resolvido = jogador.ativar(j, jogador.EnigmaResolvido(1))
+    check.eq(enigma.resolver_enigma(enigma, "computador", j_resolvido),j_resolvido,)
+    // Efeito não é aplicado quando a resposta está errada
+    check.eq(enigma.resolver_enigma(enigma, "errado", j),j)
 }
