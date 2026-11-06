@@ -1,10 +1,10 @@
-import ambiente.{type Ambiente, Ambiente, Saida, sempre}
-import enigma.{type Enigma, Enigma}
-import gleam/list
+import ambiente.{type Ambiente, Ambiente, sempre}
 import jogador.{
   type Jogador, BotaoAtivacao, CaboEnergia, Chave, EnergiaLigada, EnigmaResolvido,
-  EsteiraLigada, NotebookLigado, Papel, PeDeCabra, PortaPlacasAberta,
+  EsteiraLigada, NotebookLigado, Papel, PeDeCabra, PortaPlacasAberta, Saida,
 }
+import enigma.{type Enigma, Enigma}
+import gleam/list
 import objeto.{
   Objeto, ativando, consumindo, depois, exigindo, exigindo_flag, pegando,
 }

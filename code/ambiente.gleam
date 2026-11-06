@@ -56,3 +56,4 @@ pub fn explorar(ambiente: Ambiente, j: Jogador) -> String {
         "\n",
     )
 }
+
