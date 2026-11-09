@@ -7,9 +7,8 @@ import jogador.{type Item, BotaoAtivacao, CaboEnergia, Chave, Papel, PeDeCabra}
 import jogo.{type Jogo}
 import objeto.{type Objeto}
 
-// ---------------------------------------------------------------------------
+
 // Funções auxiliares (texto e busca; nada aqui altera o jogo)
-// ---------------------------------------------------------------------------
 
 /// Texto de um item do inventário (pattern matching sobre Item).
 fn item_texto(item: Item) -> String {
@@ -61,9 +60,8 @@ fn checar_vitoria(j: Jogo) -> Nil {
   }
 }
 
-// ---------------------------------------------------------------------------
+
 // Menu principal
-// ---------------------------------------------------------------------------
 
 /// Mostra os comandos disponíveis.
 pub fn display_main_menu() {
@@ -75,10 +73,11 @@ pub fn display_main_menu() {
   io.println("interagir(j, \"objeto\"): Interagir com um objeto")
   io.println("resolver(j, id, \"resposta\"): Resolver um enigma")
   io.println("exit(): Encerrar simulação")
+  io.println("\n")
 }
 
 /// Começa uma partida: conta a história e devolve o estado inicial.
-pub fn iniciar() -> Jogo {
+pub fn main() -> Jogo {
   io.println("TORRE DO LIXO ELETRÔNICO")
   io.println(
     "Você é um guarda de segurança e dormiu durante o trabalho. Ao acordar, a torre de descarte está fechada e você não encontra as suas chaves. Encontre-as e saia pelo portão da garagem.",
