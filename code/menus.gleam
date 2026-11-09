@@ -178,3 +178,38 @@ pub fn resolver(j: Jogo, id: Int, resposta: String) -> Jogo {
   checar_vitoria(novo)
   novo
 }
+
+
+// Demonstração: Rode a seguinte função para ver o jogo rodar sozinho
+/// Demonstração: joga o caminho principal inteiro, imprimindo cada passo.
+pub fn demonstracao() -> Nil {
+  let _fim =
+    main()
+    |> interagir("papel do guarda")
+    |> ir(6)
+    |> ir(5)
+    |> ir(4)
+    |> ir(3)
+    |> interagir("alavanca")
+    |> interagir("cabo de energia")
+    |> resolver(7, "713")
+    |> ir(4)
+    |> ir(5)
+    |> ir(6)
+    |> interagir("notebook")
+    |> ir(7)
+    |> interagir("computador do colega")
+    |> ir(5)
+    |> resolver(3, "2486")
+    |> interagir("caixa de placas")
+    |> ir(4)
+    |> interagir("grade do duto")
+    |> resolver(6, "20 55 90")
+    |> interagir("cabo de energia")
+    |> ir(2)
+    |> interagir("painel da esteira")
+    |> resolver(9, "metal")
+    |> ir(1)
+    |> resolver(10, "vermelho azul")
+  Nil
+}
