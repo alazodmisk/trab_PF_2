@@ -61,20 +61,20 @@ pub fn resolver(jogo: Jogo, id: Int, resposta: String) -> Jogo {
     }
 }
 
-/// Aplica uma ação e devolve o novo estado.
-pub fn aplicar(jogo: Jogo, acao: Acao) -> Jogo {
-    case acao {
-        Explorar -> jogo
-        Interagir(nome) -> interagir(jogo, nome)
-        Resolver(id, resposta) -> resolver(jogo, id, resposta)
-        Ir(andar) -> ir(jogo, andar)
-    }
-}
+// /// Aplica uma ação e devolve o novo estado.
+// pub fn aplicar(jogo: Jogo, acao: Acao) -> Jogo {
+//     case acao {
+//         Explorar -> jogo
+//         Interagir(nome) -> interagir(jogo, nome)
+//         Resolver(id, resposta) -> resolver(jogo, id, resposta)
+//         Ir(andar) -> ir(jogo, andar)
+//     }
+// }
 
-/// Executa uma lista de ações em sequência.
-pub fn executar(jogo: Jogo, acoes: List(Acao)) -> Jogo {
-    list.fold(acoes, jogo, aplicar)
-}
+// /// Executa uma lista de ações em sequência.
+// pub fn executar(jogo: Jogo, acoes: List(Acao)) -> Jogo {
+//     list.fold(acoes, jogo, aplicar)
+// }
 
 /// O jogador venceu quando o enigma 10 está resolvido.
 pub fn venceu(jogo: Jogo) -> Bool {
