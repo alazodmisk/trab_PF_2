@@ -6,7 +6,7 @@ import jogador.{
 import enigma.{type Enigma, Enigma}
 import gleam/list
 import objeto.{
-  Objeto, ativando, consumindo, depois, exigindo, exigindo_flag, pegando,
+  Objeto, ativando, consumindo, exigindo, exigindo_flag, pegando,
 }
 
 // ---------------------------------------------------------------------------

@@ -51,10 +51,10 @@ pub fn exigindo_flag(flag: Flag, efeito: fn(Jogador) -> Jogador) -> fn(Jogador) 
 }
 
 /// Composição: aplica f e depois g.
-pub fn depois(
-    f: fn(Jogador) -> Jogador,
-    g: fn(Jogador) -> Jogador,
-) -> fn(Jogador) -> Jogador {
-    fn(j) { g(f(j)) }
-}
+// pub fn depois(
+//     f: fn(Jogador) -> Jogador,
+//     g: fn(Jogador) -> Jogador,
+// ) -> fn(Jogador) -> Jogador {
+//     fn(j) { g(f(j)) }
+// }
 

@@ -1,12 +1,82 @@
-import ambiente
+import ambiente.{type Ambiente}
+import cenario
 import enigma.{type Enigma}
 import gleam/int
 import gleam/io
 import gleam/list
-import jogador.{type Item, BotaoAtivacao, CaboEnergia, Chave, Papel, PeDeCabra}
-import jogo.{type Jogo}
+import jogador.{
+  type Item, type Jogador, BotaoAtivacao, CaboEnergia, Chave, Papel, PeDeCabra,
+}
 import objeto.{type Objeto}
 
+
+/// =================================================
+/// JOGO
+/// =================================================
+
+
+pub type Jogo {
+    Jogo(jogador: Jogador, andares: List(Ambiente))
+}
+
+pub type Acao {
+    Explorar
+    Interagir(objeto: String)
+    Resolver(enigma: Int, resposta: String)
+    Ir(andar: Int)
+}
+
+/// Estado inicial: guarda no 7º andar.
+pub fn novo() -> Jogo {
+    Jogo(jogador: jogador.novo("Guarda", 7), andares: cenario.torre())
+}
+
+pub fn ambiente_atual(jogo: Jogo) -> Result(Ambiente, Nil) {
+    ambiente.buscar(jogo.andares, jogo.jogador.localizacao)
+}
+
+/// Vai para outro andar, se a saída estiver aberta.
+pub fn tentar_ir(jogo: Jogo, destino: Int) -> Jogo {
+    case ambiente_atual(jogo) {
+        Error(_) -> jogo
+        Ok(atual) ->
+            case ambiente.saida_aberta(atual, destino, jogo.jogador) {
+                True -> Jogo(..jogo, jogador: jogador.mover(jogo.jogador, destino))
+                False -> jogo
+            }
+    }
+}
+
+/// Interage com um objeto do andar atual.
+pub fn tentar_interagir(jogo: Jogo, nome: String) -> Jogo {
+    case ambiente_atual(jogo) {
+        Error(_) -> jogo
+        Ok(atual) ->
+            case list.find(atual.objetos, fn(o) { o.nome == nome }) {
+                Ok(obj) -> Jogo(..jogo, jogador: obj.interacao(jogo.jogador))
+                Error(_) -> jogo
+            }
+    }
+}
+
+/// Tenta resolver um enigma do andar atual.
+pub fn tentar_resolver(jogo: Jogo, id: Int, resposta: String) -> Jogo {
+    case ambiente_atual(jogo) {
+        Error(_) -> jogo
+        Ok(atual) ->
+            case list.find(atual.enigmas, fn(e) { e.id == id }) {
+                Ok(e) ->
+                    Jogo(..jogo, jogador: enigma.resolver_enigma(e, resposta, jogo.jogador))
+                Error(_) -> jogo
+            }
+    }
+}
+
+
+/// O jogador venceu quando o enigma 10 está resolvido.
+pub fn venceu(jogo: Jogo) -> Bool {
+    jogador.resolvido(jogo.jogador, 10)
+}
 
 // Funções auxiliares (texto e busca; nada aqui altera o jogo)
 
@@ -23,7 +93,7 @@ fn item_texto(item: Item) -> String {
 
 /// Imprime a descrição do andar atual (nome, objetos e saídas).
 fn descrever(j: Jogo) -> Nil {
-  case jogo.ambiente_atual(j) {
+  case ambiente_atual(j) {
     Ok(a) -> io.println(ambiente.explorar(a, j.jogador))
     Error(_) -> io.println("Você está perdido.")
   }
@@ -31,7 +101,7 @@ fn descrever(j: Jogo) -> Nil {
 
 /// Procura um objeto pelo nome no andar atual.
 fn achar_objeto(j: Jogo, nome: String) -> Result(Objeto, Nil) {
-  case jogo.ambiente_atual(j) {
+  case ambiente_atual(j) {
     Ok(a) -> list.find(a.objetos, fn(o) { o.nome == nome })
     Error(_) -> Error(Nil)
   }
@@ -51,7 +121,7 @@ fn mostrar_enigma(e: Enigma, j: Jogo) -> Nil {
 
 /// Imprime a mensagem final se o jogador venceu.
 fn checar_vitoria(j: Jogo) -> Nil {
-  case jogo.venceu(j) {
+  case venceu(j) {
     True ->
       io.println(
         "O portão se abre. O guarda escapa da Torre do Lixo Eletrônico. FIM!",
@@ -60,8 +130,9 @@ fn checar_vitoria(j: Jogo) -> Nil {
   }
 }
 
-
-// Menu principal
+/// =================================================
+/// MENU
+/// =================================================
 
 /// Mostra os comandos disponíveis.
 pub fn display_main_menu() {
@@ -83,14 +154,16 @@ pub fn main() -> Jogo {
     "Você é um guarda de segurança e dormiu durante o trabalho. Ao acordar, a torre de descarte está fechada e você não encontra as suas chaves. Encontre-as e saia pelo portão da garagem.",
   )
   display_main_menu()
-  let j = jogo.novo()
+  let j = novo()
   descrever(j)
+  io.println("\n")
   j
 }
 
 /// m1: explora o ambiente atual.
 pub fn m1(j: Jogo) -> Jogo {
   descrever(j)
+  io.println("\n")
   j
 }
 
@@ -105,12 +178,13 @@ pub fn m2(j: Jogo) -> Jogo {
       })
     }
   }
+  io.println("\n")
   j
 }
 
 /// m3: examina os enigmas do andar atual.
 pub fn m3(j: Jogo) -> Jogo {
-  case jogo.ambiente_atual(j) {
+  case ambiente_atual(j) {
     Error(_) -> io.println("Você está perdido.")
     Ok(a) ->
       case a.enigmas {
@@ -118,6 +192,7 @@ pub fn m3(j: Jogo) -> Jogo {
         enigmas -> list.each(enigmas, fn(e) { mostrar_enigma(e, j) })
       }
   }
+  io.println("\n")
   j
 }
 
@@ -127,23 +202,24 @@ pub fn exit() {
 }
 
 // ---------------------------------------------------------------------------
-// Atalhos de ação: chamam a lógica pura de jogo.gleam e contam o resultado
+// Atalhos de ação: chamam a lógica pura (tentar_*) e contam o resultado
 // ---------------------------------------------------------------------------
 
 /// Vai para outro andar, se a saída estiver aberta.
 pub fn ir(j: Jogo, andar: Int) -> Jogo {
-  let novo = jogo.ir(j, andar)
-  case novo.jogador.localizacao == j.jogador.localizacao {
+  let proximo = tentar_ir(j, andar)
+  case proximo.jogador.localizacao == j.jogador.localizacao {
     True ->
       io.println(
         "Você não consegue ir para o " <> int.to_string(andar) <> "º andar daqui.",
       )
     False -> {
       io.println("Você foi para o " <> int.to_string(andar) <> "º andar.")
-      descrever(novo)
+      descrever(proximo)
     }
   }
-  novo
+  io.println("\n")
+  proximo
 }
 
 /// Interage com um objeto do andar atual.
@@ -154,29 +230,31 @@ pub fn interagir(j: Jogo, nome: String) -> Jogo {
       j
     }
     Ok(obj) -> {
-      let novo = jogo.interagir(j, nome)
+      let proximo = tentar_interagir(j, nome)
       // Se o jogador não mudou, a interação não teve efeito
-      case novo.jogador == j.jogador {
+      case proximo.jogador == j.jogador {
         True -> io.println("Nada acontece.")
         False -> io.println(obj.descricao)
       }
-      novo
+      io.println("\n")
+      proximo
     }
   }
 }
 
 /// Tenta resolver um enigma do andar atual.
 pub fn resolver(j: Jogo, id: Int, resposta: String) -> Jogo {
-  let novo = jogo.resolver(j, id, resposta)
-  case novo.jogador == j.jogador {
+  let proximo = tentar_resolver(j, id, resposta)
+  case proximo.jogador == j.jogador {
     True ->
       io.println(
         "Não funcionou. Confira a resposta, o seu inventário e se você está no andar certo.",
       )
     False -> io.println("Enigma " <> int.to_string(id) <> " resolvido!")
   }
-  checar_vitoria(novo)
-  novo
+  checar_vitoria(proximo)
+  io.println("\n")
+  proximo
 }
 
 
