@@ -9,6 +9,9 @@ import objeto.{
   Objeto, ativando, consumindo, depois, exigindo, exigindo_flag, pegando,
 }
 
+/// Aqui, cada andar da torre é um ambiente. Cada ambiente tem uma lista de objetos, uma lista de saídas e uma lista de enigmas. O jogador pode interagir com os objetos, ir para outros andares pelas saídas e resolver enigmas.
+/// Cada andar tem sua resolução de enigmas, que podem ser objetos ou respostas digitadas. O jogador precisa cumprir requisitos para acessar saídas e resolver enigmas. A torre é composta por 7 andares, cada um com suas características e desafios. 
+/// Cada função tem suas soluções individuais, que podem ser objetos ou respostas digitadas. O jogador precisa cumprir requisitos para acessar saídas e resolver enigmas. A torre é composta por 7 andares, cada um com suas características e desafios.
 // ---------------------------------------------------------------------------
 // Funções auxiliares (só deste arquivo)
 // ---------------------------------------------------------------------------
@@ -20,6 +23,9 @@ fn nada(j: Jogador) -> Jogador {
 
 /// Junta vários efeitos em um só, aplicados na ordem da lista.
 /// É o mesmo que encadear `depois(a, depois(b, c))`, só que mais legível.
+/// ANÁLISE: Faça uma função que recebe uma lista de efeitos e retorna um efeito que aplica todos os efeitos da lista em sequência.
+/// TIPOS DE DADOS: A entrada é uma *lista de efeitos* representada pelo tipo *List(fn(Jogador) -> Jogador)*. A saída é um efeito que aplica todos os efeitos da lista em sequência, representado pelo tipo *fn(Jogador) -> Jogador*.
+/// ESPECIFICAÇÃO: Recebe uma *lista de efeitos* e retorna um efeito que aplica todos os efeitos da lista em sequência. O efeito resultante aplica cada efeito da lista na ordem em que aparecem, passando o jogador atualizado de um efeito para o próximo.
 fn em_sequencia(
   efeitos: List(fn(Jogador) -> Jogador),
 ) -> fn(Jogador) -> Jogador {
@@ -31,6 +37,9 @@ fn em_sequencia(
 // ---------------------------------------------------------------------------
 
 /// Os 7 andares da torre. O jogo busca o andar pelo número (ambiente.buscar).
+/// // ANÁLISE: Faça uma função que retorna uma lista com os 7 andares da torre, cada um representado pelo tipo *Ambiente*.
+/// // TIPOS DE DADOS: A saída é uma *lista de andares* representada pelo tipo *List(Ambiente)*.
+/// // ESPECIFICAÇÃO: Retorna uma *lista com os 7 andares da torre*, cada um representado pelo tipo *Ambiente*. A lista contém os andares na ordem em que aparecem na torre, do 1º ao 7º andar.
 pub fn torre() -> List(Ambiente) {
   [
     garagem(),
@@ -46,7 +55,9 @@ pub fn torre() -> List(Ambiente) {
 // ---------------------------------------------------------------------------
 // Andar 1: Garagem (enigma 10)
 // ---------------------------------------------------------------------------
-
+/// ANÁLISE: Faça uma função que cria o enigma 10, que é o portão da garagem. O enigma precisa da chave e dos dois botões de ativação, nesta ordem de resposta.
+/// TIPOS DE DADOS: A saída é um *enigma* representado pelo tipo *Enigma*.
+/// ESPECIFICAÇÃO: Cria o enigma 10, que é o portão da garagem. O enigma precisa da chave e dos dois botões de ativação, nesta ordem de resposta. O enigma contém um identificador, uma descrição, uma solução, uma lista de pistas, um requisito e um efeito.
 /// Enigma 10: o portão. Precisa da chave e dos dois botões, nesta ordem de resposta.
 fn enigma10() -> Enigma {
   Enigma(
@@ -66,6 +77,9 @@ fn enigma10() -> Enigma {
   )
 }
 
+/// ANÁLISE: Faça uma função que cria o ambiente da garagem, que é o 1º andar da torre. O ambiente contém o portão da garagem e um papel colado na parede com a ordem de acionamento dos botões.
+/// TIPOS DE DADOS: A saída é um *ambiente* representado pelo tipo *Ambiente*.
+/// ESPECIFICAÇÃO: Cria o ambiente da garagem, que é o 1º andar da torre. O ambiente contém o portão da garagem e um papel colado na parede com a ordem de acionamento dos botões. O ambiente contém um identificador, um nome, uma descrição, uma lista de objetos, uma lista de saídas e uma lista de
 /// 1º andar: a saída da torre.
 pub fn garagem() -> Ambiente {
   Ambiente(

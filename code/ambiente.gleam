@@ -7,6 +7,7 @@ import objeto.{type Objeto}
 
 /// Uma saída para outro andar; só está aberta se o requisito for cumprido.
 pub type Ambiente {
+    /// Tipo ambiente contendo andar, nome, descrição, uma lista de objetos, uma lista de saídas e uma lista de enigmas.
     Ambiente(
         andar: Int,
         nome: String,
@@ -23,6 +24,9 @@ pub fn sempre(_j: Jogador) -> Bool {
 }
 
 /// Busca recursiva do andar pelo número.
+/// ANÁLISE: Faça uma função que recebe uma lista de andares e um número de andar e busca recursivamente o ambiente correspondente ao número de andar na lista. Se o ambiente for encontrado, retorna Ok(ambiente); caso contrário, retorna Error(Nil).
+/// TIPOS DE DADOS: A entrada é uma *lista de andares* representada pelo tipo *List(Ambiente)* e um *número de andar* representado pelo tipo primitivo *Int*. A saída é um resultado que pode ser Ok(ambiente) ou Error(Nil), representado pelo tipo *Result(Ambiente, Nil)*.
+/// ESPECIFICAÇÃO: Recebe uma *lista de andares* e um *número de andar* e busca recursivamente o ambiente correspondente ao número de andar na lista. Se o ambiente for encontrado, retorna Ok(ambiente); caso contrário, retorna Error(Nil).
 pub fn buscar(andares: List(Ambiente), numero: Int) -> Result(Ambiente, Nil) {
     case andares {
         [] -> Error(Nil)
