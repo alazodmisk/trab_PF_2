@@ -15,7 +15,6 @@ import jogador.{
     EnigmaResolvido, EsteiraLigada, Jogador, NotebookLigado, Papel, PeDeCabra,
     PortaPlacasAberta, Saida,
 }
-import jogo.{type Acao, type Jogo, Explorar, Interagir, Ir, Jogo, Resolver}
 import objeto.{
     Objeto, ativando, consumindo, depois, exigindo, exigindo_flag, pegando, quando,
 }
@@ -155,16 +154,6 @@ pub fn exigindo_flag_examples() {
     check.eq(efeito(j), j)
     check.eq(efeito(jogador.ativar(j, EnergiaLigada)), Jogador("Joao", [], 1, [NotebookLigado, EnergiaLigada]))
 }
-
-pub fn depois_examples() {
-    let j = jogador.novo("Joao", 1)
-    let efeito = depois(ativando(EnergiaLigada), ativando(NotebookLigado))
-    let efeito2 = depois(fn(x) { jogador.pegar(x, Chave) }, ativando(EnergiaLigada))
-
-    check.eq(efeito(j), Jogador("Joao", [], 1, [NotebookLigado, EnergiaLigada]))
-    check.eq(efeito2(j), Jogador("Joao", [Chave], 1, [EnergiaLigada]))
-}
-
 
 // Examples de enigma.gleam
 pub fn normalizar_examples() {

@@ -49,12 +49,3 @@ pub fn exigindo(item: Item, efeito: fn(Jogador) -> Jogador) -> fn(Jogador) -> Jo
 pub fn exigindo_flag(flag: Flag, efeito: fn(Jogador) -> Jogador) -> fn(Jogador) -> Jogador {
     quando(fn(j) { jogador.flag_ativa(j, flag) }, efeito)
 }
-
-/// Composição: aplica f e depois g.
-// pub fn depois(
-//     f: fn(Jogador) -> Jogador,
-//     g: fn(Jogador) -> Jogador,
-// ) -> fn(Jogador) -> Jogador {
-//     fn(j) { g(f(j)) }
-// }
-
