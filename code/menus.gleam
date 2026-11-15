@@ -11,6 +11,9 @@ import objeto.{type Objeto}
 // Funções auxiliares (texto e busca; nada aqui altera o jogo)
 
 /// Texto de um item do inventário (pattern matching sobre Item).
+/// /// ANÁLISE: Faça uma função que recebe um item e retorna uma string representando o nome do item. A função deve usar pattern matching para identificar o tipo de item e retornar a string correspondente.
+/// TIPOS DE DADOS: A entrada é um *item* representado pelo tipo *Item*. A saída é uma *string* representando o nome do item, de acordo com o tipo de item.
+/// ESPECIFICAÇÃO: Recebe um *item* e retorna uma *string* representando o nome do item. 
 fn item_texto(item: Item) -> String {
   case item {
     Chave -> "Chave da garagem"
@@ -22,6 +25,9 @@ fn item_texto(item: Item) -> String {
 }
 
 /// Imprime a descrição do andar atual (nome, objetos e saídas).
+/// /// ANÁLISE: Faça uma função que recebe um jogo e imprime a descrição do ambiente atual do jogador, incluindo o nome do ambiente, os objetos presentes e as saídas disponíveis. A função deve buscar o ambiente atual do jogador e formatar a saída de forma legível.
+/// TIPOS DE DADOS: A entrada é um *jogo* representado pelo tipo *Jogo*. A saída é do tipo *Nil*, pois a função apenas imprime informações na tela.
+/// ESPECIFICAÇÃO: Recebe um *jogo* e imprime a descrição do ambiente atual do jogador, incluindo o nome do ambiente, os objetos presentes e as saídas disponíveis. 
 fn descrever(j: Jogo) -> Nil {
   case jogo.ambiente_atual(j) {
     Ok(a) -> io.println(ambiente.explorar(a, j.jogador))
@@ -30,6 +36,10 @@ fn descrever(j: Jogo) -> Nil {
 }
 
 /// Procura um objeto pelo nome no andar atual.
+/// /// ANALÍSE: Faça uma função que recebe um jogo e o nome de um objeto. A função deve buscar o objeto correspondente ao nome na lista de objetos do ambiente atual do jogador. Se o objeto for encontrado, retorna Ok(objeto); caso contrário, retorna Error(Nil).
+/// TIPOS DE DADOS: A entrada é um *jogo* representado pelo tipo *Jogo* e o *nome* do objeto representado pelo tipo primitivo *String*.
+/// A saída é um resultado que pode ser Ok(objeto) ou Error(Nil), representado pelo tipo *Result(Objeto, Nil)*.
+/// ESPECIFICAÇÃO: Recebe um *jogo* e o *nome* do objeto. A função deve buscar o objeto correspondente ao nome na lista de objetos do ambiente atual do jogador. Se o objeto for encontrado, retorna Ok(objeto); caso contrário, retorna Error(Nil).
 fn achar_objeto(j: Jogo, nome: String) -> Result(Objeto, Nil) {
   case jogo.ambiente_atual(j) {
     Ok(a) -> list.find(a.objetos, fn(o) { o.nome == nome })
@@ -38,6 +48,9 @@ fn achar_objeto(j: Jogo, nome: String) -> Result(Objeto, Nil) {
 }
 
 /// Imprime um enigma: situação, descrição e pistas.
+/// /// ANÁLISE: Faça uma função que recebe um enigma e um jogo. A função deve verificar se o enigma foi resolvido pelo jogador no jogo. Se o enigma foi resolvido, imprime "resolvido"; caso contrário, imprime "em aberto". Em seguida, imprime a descrição do enigma e todas as suas pistas. 
+/// TIPOS DE DADOS: A entrada é um *enigma* representado pelo tipo *Enigma* e um *jogo* representado pelo tipo *Jogo*. A saída é do tipo *Nil*, pois a função apenas imprime informações na tela. 
+/// ESPECIFICAÇÃO: Recebe um *enigma* e um *jogo*. A função deve verificar se o enigma foi resolvido pelo jogador no jogo. 
 fn mostrar_enigma(e: Enigma, j: Jogo) -> Nil {
   let situacao = case jogador.resolvido(j.jogador, e.id) {
     True -> "resolvido"
@@ -50,6 +63,9 @@ fn mostrar_enigma(e: Enigma, j: Jogo) -> Nil {
 }
 
 /// Imprime a mensagem final se o jogador venceu.
+/// /// ANÁLISE: Faça uma função que recebe um jogo e verifica se o jogador venceu. A função deve verificar se o enigma com id 10 está resolvido no jogador. Se estiver resolvido, imprime a mensagem de vitória; caso contrário, não faz nada.
+/// TIPOS DE DADOS: A entrada é um *jogo* representado pelo tipo *Jogo*. A saída é do tipo *Nil*, pois a função apenas imprime informações na tela.
+/// ESPECIFICAÇÃO: Recebe um *jogo* e verifica se o jogador venceu. A função deve verificar se o enigma com id 10 está resolvido no jogador. Se estiver resolvido, imprime a mensagem de vitória; caso contrário, não faz nada.
 fn checar_vitoria(j: Jogo) -> Nil {
   case jogo.venceu(j) {
     True ->
