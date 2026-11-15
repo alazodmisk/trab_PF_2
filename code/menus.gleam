@@ -27,14 +27,20 @@ pub type Acao {
 }
 
 /// Estado inicial: guarda no 7º andar.
+/// ANÁLISE: Faça uma função que cria um novo jogo com um jogador chamado "Guarda" no 7º andar e os andares do cenario.torre().
 pub fn novo() -> Jogo {
     Jogo(jogador: jogador.novo("Guarda", 7), andares: cenario.torre())
 }
 
+/// ANÁLISE: Faça uma função que recebe um jogo e retorna o ambiente atual do jogador. A função deve buscar o ambiente correspondente ao andar do jogador na lista de andares do jogo. Se o ambiente for encontrado, retorna Ok(ambiente); caso contrário, retorna Error(Nil).
+/// TIPOS DE DADOS: A entrada é um *jogo* representado pelo tipo *Jogo*. A saída é um resultado que pode ser Ok(ambiente) ou Error(Nil), representado pelo tipo *Result(Ambiente, Nil)*.
+/// ESPECIFICAÇÃO: Recebe um *jogo* e retorna o ambiente atual do jogador. A função deve buscar o ambiente correspondente ao andar do jogador na lista de andares do jogo. Se o ambiente for encontrado, retorna Ok(ambiente); caso contrário, retorna Error(Nil).
 pub fn ambiente_atual(jogo: Jogo) -> Result(Ambiente, Nil) {
     ambiente.buscar(jogo.andares, jogo.jogador.localizacao)
 }
 
+/// ANÁLISE: Faça uma função que recebe um jogo e um destino e verifica se o jogador pode ir para esse destino a partir do ambiente atual. A função deve retornar True se o jogador puder ir para o destino e False caso contrário.
+/// TIPOS DE DADOS: A entrada é um *jogo* representado pelo tipo
 /// Vai para outro andar, se a saída estiver aberta.
 pub fn tentar_ir(jogo: Jogo, destino: Int) -> Jogo {
     case ambiente_atual(jogo) {
@@ -48,6 +54,9 @@ pub fn tentar_ir(jogo: Jogo, destino: Int) -> Jogo {
 }
 
 /// Interage com um objeto do andar atual.
+/// ANALÍSE: Faça uma função que recebe um jogo e o nome de um objeto. A função deve buscar o objeto correspondente ao nome na lista de objetos do ambiente atual do jogador. Se o objeto for encontrado, aplica a interação do objeto no jogador e retorna o novo estado do jogo; caso contrário, retorna o jogo intacto.
+/// TIPOS DE DADOS: A entrada é um *jogo* representado pelo tipo *Jogo* e o *nome* do objeto representado pelo tipo primitivo *String*. A saída é o novo estado do jogo, representado pelo tipo *Jogo*.
+/// ESPECIFICAÇÃO: Recebe um *jogo* e o *nome* do objeto. A função deve buscar o objeto correspondente ao nome na lista de objetos do ambiente atual do jogador. Se o objeto for encontrado, aplica a interação do objeto no jogador e retorna o novo estado do jogo; caso contrário, retorna o jogo intacto.
 pub fn tentar_interagir(jogo: Jogo, nome: String) -> Jogo {
     case ambiente_atual(jogo) {
         Error(_) -> jogo
@@ -60,6 +69,9 @@ pub fn tentar_interagir(jogo: Jogo, nome: String) -> Jogo {
 }
 
 /// Tenta resolver um enigma do andar atual.
+/// ANÁLISE: Faça uma função que recebe um jogo, o id de um enigma e uma resposta. A função deve buscar o enigma correspondente ao id na lista de enigmas do ambiente atual do jogador. Se o enigma for encontrado, aplica a função resolver_enigma do módulo enigma no jogador e retorna o novo estado do jogo; caso contrário, retorna o jogo intacto.
+/// TIPOS DE DADOS: A entrada é um *jogo* representado pelo tipo *Jogo*, o *id* do enigma representado pelo tipo primitivo *Int* e a *resposta* representada pelo tipo primitivo *String*. A saída é o novo estado do jogo, representado pelo tipo *Jogo*.
+/// ESPECIFICAÇÃO: Recebe um *jogo*, o *id* do enigma e uma *resposta*. A função deve buscar o enigma correspondente ao id na lista de enigmas do ambiente atual do jogador. Se o enigma for encontrado, aplica a função resolver_enigma do módulo enigma no jogador e retorna o novo estado do jogo; caso contrário, retorna o jogo intacto.
 pub fn tentar_resolver(jogo: Jogo, id: Int, resposta: String) -> Jogo {
     case ambiente_atual(jogo) {
         Error(_) -> jogo
@@ -72,8 +84,10 @@ pub fn tentar_resolver(jogo: Jogo, id: Int, resposta: String) -> Jogo {
     }
 }
 
-
 /// O jogador venceu quando o enigma 10 está resolvido.
+/// ///ANÁLISE: Faça uma função que recebe um jogo e verifica se o jogador venceu. A função deve verificar se o enigma com id 10 está resolvido no jogador. Se estiver resolvido, retorna True; caso contrário, retorna False.
+/// TIPOS DE DADOS: A entrada é um *jogo* representado pelo tipo *Jogo*. A saída é um valor booleano representado pelo tipo primitivo *Bool*.
+/// ESPECIFICAÇÃO: Recebe um *jogo* e verifica se o jogador venceu. A função deve verificar se o enigma com id 10 está resolvido no jogador. Se estiver resolvido, retorna True; caso contrário, retorna False.
 pub fn venceu(jogo: Jogo) -> Bool {
     jogador.resolvido(jogo.jogador, 10)
 }
@@ -81,6 +95,9 @@ pub fn venceu(jogo: Jogo) -> Bool {
 // Funções auxiliares (texto e busca; nada aqui altera o jogo)
 
 /// Texto de um item do inventário (pattern matching sobre Item).
+/// ANÁLISE: Faça uma função que recebe um item e retorna uma string representando o nome do item. A função deve usar pattern matching para identificar o tipo de item e retornar a string correspondente.
+/// TIPOS DE DADOS: A entrada é um *item* representado pelo tipo *Item*. A saída é uma *string* representando o nome do item, de acordo com o tipo de item.
+/// ESPECIFICAÇÃO: Recebe um *item* e retorna uma *string* representando o nome do item. 
 fn item_texto(item: Item) -> String {
   case item {
     Chave -> "Chave da garagem"
@@ -92,6 +109,9 @@ fn item_texto(item: Item) -> String {
 }
 
 /// Imprime a descrição do andar atual (nome, objetos e saídas).
+/// ANÁLISE: Faça uma função que recebe um jogo e imprime a descrição do ambiente atual do jogador, incluindo o nome do ambiente, os objetos presentes e as saídas disponíveis. A função deve buscar o ambiente atual do jogador e formatar a saída de forma legível.
+/// TIPOS DE DADOS: A entrada é um *jogo* representado pelo tipo *Jogo*. A saída é do tipo *Nil*, pois a função apenas imprime informações na tela.
+/// ESPECIFICAÇÃO: Recebe um *jogo* e imprime a descrição do ambiente atual do jogador, incluindo o nome do ambiente, os objetos presentes e as saídas disponíveis. 
 fn descrever(j: Jogo) -> Nil {
   case ambiente_atual(j) {
     Ok(a) -> io.println(ambiente.explorar(a, j.jogador))
@@ -100,6 +120,10 @@ fn descrever(j: Jogo) -> Nil {
 }
 
 /// Procura um objeto pelo nome no andar atual.
+/// ANALÍSE: Faça uma função que recebe um jogo e o nome de um objeto. A função deve buscar o objeto correspondente ao nome na lista de objetos do ambiente atual do jogador. Se o objeto for encontrado, retorna Ok(objeto); caso contrário, retorna Error(Nil).
+/// TIPOS DE DADOS: A entrada é um *jogo* representado pelo tipo *Jogo* e o *nome* do objeto representado pelo tipo primitivo *String*.
+/// A saída é um resultado que pode ser Ok(objeto) ou Error(Nil), representado pelo tipo *Result(Objeto, Nil)*.
+/// ESPECIFICAÇÃO: Recebe um *jogo* e o *nome* do objeto. A função deve buscar o objeto correspondente ao nome na lista de objetos do ambiente atual do jogador. Se o objeto for encontrado, retorna Ok(objeto); caso contrário, retorna Error(Nil).
 fn achar_objeto(j: Jogo, nome: String) -> Result(Objeto, Nil) {
   case ambiente_atual(j) {
     Ok(a) -> list.find(a.objetos, fn(o) { o.nome == nome })
@@ -108,6 +132,9 @@ fn achar_objeto(j: Jogo, nome: String) -> Result(Objeto, Nil) {
 }
 
 /// Imprime um enigma: situação, descrição e pistas.
+/// ANÁLISE: Faça uma função que recebe um enigma e um jogo. A função deve verificar se o enigma foi resolvido pelo jogador no jogo. Se o enigma foi resolvido, imprime "resolvido"; caso contrário, imprime "em aberto". Em seguida, imprime a descrição do enigma e todas as suas pistas. 
+/// TIPOS DE DADOS: A entrada é um *enigma* representado pelo tipo *Enigma* e um *jogo* representado pelo tipo *Jogo*. A saída é do tipo *Nil*, pois a função apenas imprime informações na tela. 
+/// ESPECIFICAÇÃO: Recebe um *enigma* e um *jogo*. A função deve verificar se o enigma foi resolvido pelo jogador no jogo. 
 fn mostrar_enigma(e: Enigma, j: Jogo) -> Nil {
   let situacao = case jogador.resolvido(j.jogador, e.id) {
     True -> "resolvido"
@@ -120,6 +147,9 @@ fn mostrar_enigma(e: Enigma, j: Jogo) -> Nil {
 }
 
 /// Imprime a mensagem final se o jogador venceu.
+/// ANÁLISE: Faça uma função que recebe um jogo e verifica se o jogador venceu. A função deve verificar se o enigma com id 10 está resolvido no jogador. Se estiver resolvido, imprime a mensagem de vitória; caso contrário, não faz nada.
+/// TIPOS DE DADOS: A entrada é um *jogo* representado pelo tipo *Jogo*. A saída é do tipo *Nil*, pois a função apenas imprime informações na tela.
+/// ESPECIFICAÇÃO: Recebe um *jogo* e verifica se o jogador venceu. A função deve verificar se o enigma com id 10 está resolvido no jogador. Se estiver resolvido, imprime a mensagem de vitória; caso contrário, não faz nada.
 fn checar_vitoria(j: Jogo) -> Nil {
   case venceu(j) {
     True ->
